@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendor Registration</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+      <!-- Navbar -->
+    <nav class="navbar shadow-sm bg-white fixed-top">
+      <div class="container">
+        <div class="d-flex align-items-center w-100">
+          <!-- Left side: Logo -->
+          <div class="d-flex align-items-center">
+            
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+              <img
+                src="src/img/logo.png"
+                alt="GoMart Logo"
+                width="100"
+                height="auto"
+              />
+            </a>
+          </div>
+
+          <!-- Right side: Nav item -->
+          <div class="d-flex align-items-center ms-auto">
+            <!-- Nav items -->
+            <div class="nav-item mx-3">
+              <a class="nav-link " href="#">Home</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">Stores</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">All Products</a>
+            </div>
+
+      
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div
+      class="center bg-white text-center rounded-4 mt-4"
+      style="width: 400px"
+    >
+      <span class="fw-bold fs-4">Vendor Registration</span>
+      <form id="vendorForm">
+        <!-- Business Information -->
+        <div class="form-floating mb-3 mt-3">
+          <input
+            type="text"
+            class="form-control"
+            id="companyName"
+            placeholder="Company Name"
+            name="company_name"
+            required
+          />
+          <label for="companyName">Company Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="businessRegNumber"
+            placeholder="Business Registration Number"
+            name="business_registration_number"
+          />
+          <label for="businessRegNumber">Business Registration Number</label>
+        </div>
+
+        <!-- Address Details -->
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="warehouseAddress"
+            placeholder="Warehouse Address"
+            name="warehouse_address"
+            required
+          />
+          <label for="warehouseAddress">Warehouse Address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="tel"
+            class="form-control"
+            id="businessPhoneNum"
+            placeholder="Business Phone Number"
+            name="business_phoneNum"
+            required
+          />
+          <label for="businessPhone">Business Phone Number</label>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-3">
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </div>
+      </form>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="src/img/bg design.png" alt="" width="550px" />
+    </div>
+  </body>
+</html>

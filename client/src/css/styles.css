@@ -1,0 +1,183 @@
+.center {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+body {
+  font-family: "League Spartan" !important;
+  padding-top: 70px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #0275d8 !important;
+  font-weight: bold;
+}
+
+.content {
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+  border-radius: 10px;
+  border-style: solid 5px;
+  border-color: #0275d8;
+}
+
+/* Navbar Styles */
+.nav-link {
+  color: #2c3e50;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.form-control {
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #3498db;
+}
+
+.btn-outline-primary {
+  border-radius: 0 8px 8px 0;
+  border-left: none;
+}
+
+.offcanvas {
+  width: 5rem;
+}
+
+.offcanvas.offcanvas-start {
+  width: 250px !important; /* Adjust this value to make it shorter/wider */
+}
+
+.offcanvas-title {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.offcanvas .nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.offcanvas .nav-link:hover {
+  background-color: #f8f9fa;
+}
+
+.offcanvas .nav-link.active {
+  background-color: #e7f1ff;
+  color: #3498db;
+}
+
+/* inventory styles */
+.nav-tabs .nav-link.active {
+  background-color: #e7f1ff !important;
+  border-color: #dee2e6 #dee2e6 #e7f1ff;
+}
+
+.tab-pane {
+  width: 100%;
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%;
+  border-radius: 0.25rem; /* rounded corners */
+}
+
+.table thead {
+  background-color: #ff0015;
+  color: white;
+}
+
+.table th:nth-child(1) {
+  width: 20%; /* Product Name */
+}
+
+.table th:nth-child(2) {
+  width: 15%; /* Vendor */
+}
+
+.table th:nth-child(3) {
+  width: 15%; /* Brand */
+}
+
+.table th:nth-child(4) {
+  width: 15%; /* Product Type */
+}
+
+.table th:nth-child(5) {
+  width: 10%; /* Quantity */
+}
+
+.table th:nth-child(6) {
+  width: 10%; /* Total Stocks */
+}
+
+.table th:nth-child(7) {
+  width: 10%; /* Price */
+}
+
+.table th:nth-child(8) {
+  width: 10%; /* Actions */
+}
+
+.table td {
+  word-wrap: break-word;
+}
+
+/* reorder request styles */
+.pagination .page-link {
+  color: #0d6efd;
+  padding: 0.5rem 0.75rem;
+  margin: 0 3px;
+  border-radius: 4px;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.pagination .page-link:hover {
+  background-color: #e7f1ff;
+  border-color: #e7f1ff;
+}
+
+/* poducts styles */
+/* .product-types {
+  height: 250px;
+  overflow-y: auto;
+}
+
+.sidebar {
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card img {
+  height: 120px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-text {
+  font-size: 12px;
+}
+
+.card-body {
+  padding: 1px 10 0 10px;
+} */

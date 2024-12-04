@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+        <!-- Navbar -->
+    <nav class="navbar shadow-sm bg-white fixed-top">
+      <div class="container">
+        <div class="d-flex align-items-center w-100">
+          <!-- Left side: Logo -->
+          <div class="d-flex align-items-center">
+            
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+              <img
+                src="src/img/logo.png"
+                alt="GoMart Logo"
+                width="100"
+                height="auto"
+              />
+            </a>
+          </div>
+
+          <!-- Right side: Nav item -->
+          <div class="d-flex align-items-center ms-auto">
+            <!-- Nav items -->
+            <div class="nav-item mx-3">
+              <a class="nav-link " href="#">Home</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">Stores</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">All Products</a>
+            </div>
+
+      
+      </div>
+    </nav>
+
+
+    <!-- Content -->
+    <div class="center bg-white text-center rounded-4" style="width: 350px">
+ 
+      <span class="fw-bold fs-4 ">Buyer Information</span>
+      <form id="buyerForm">
+        <div class="form-floating mb-3 mt-3">
+          <input
+            type="text"
+            class="form-control"
+            id="fullName"
+            placeholder="Full Name"
+            name="full_name"
+            required
+          />
+          <label for="fullName">Full Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="tel"
+            class="form-control"
+            id="phoneNumber"
+            placeholder="Phone Number"
+            name="phone_number"
+            required
+          />
+          <label for="phoneNumber">Phone Number</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            placeholder="Address"
+            name="address"
+            required
+          />
+          <label for="address">Address</label>
+        </div>
+        <div class="mb-3">
+          <label for="profilePicture" class="form-label">Profile Picture</label>
+          <input
+            type="file"
+            class="form-control"
+            id="profilePicture"
+            name="profile_picture"
+            accept="image/*"
+          />
+          <small class="text-muted"
+            >Leave empty to use the default profile picture.</small
+          >
+        </div>
+        <div class="mt-3">
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </div>
+      </form>
+    </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="src/img/bg design.png" alt="" width="550px" />
+    </div>
+  </body>
+</html>

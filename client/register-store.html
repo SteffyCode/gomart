@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoMart</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+        <!-- Navbar -->
+    <nav class="navbar shadow-sm bg-white fixed-top">
+      <div class="container">
+        <div class="d-flex align-items-center w-100">
+          <!-- Left side: Logo -->
+          <div class="d-flex align-items-center">
+            
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+              <img
+                src="src/img/logo.png"
+                alt="GoMart Logo"
+                width="100"
+                height="auto"
+              />
+            </a>
+          </div>
+
+          <!-- Right side: Nav item -->
+          <div class="d-flex align-items-center ms-auto">
+            <!-- Nav items -->
+            <div class="nav-item mx-3">
+              <a class="nav-link " href="#">Home</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">Vendors</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">All Products</a>
+            </div>
+
+      
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div
+      class="center bg-white text-center rounded-4 mt-4"
+      style="width: 400px"
+    >
+      <span class="fw-bold fs-4">Register Your Store</span>
+      <p class="text-center">Complete the details below to register your store.</p>
+      <form id="sellerForm">
+        <!-- Store Name -->
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="storeName"
+              placeholder="Store Name"
+              name="store_name"
+              required
+            />
+            <label for="storeName">Store Name</label>
+          </div>
+          <!-- Store Category -->
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              id="storeCategory"
+              name="store_category"
+              required
+            >
+              <option value="" disabled selected>Select Store Category</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Other">Other</option>
+            </select>
+            <label for="storeCategory">Store Category</label>
+          </div>
+          <!-- Contact Number -->
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="contactNumber"
+              placeholder="Contact Number"
+              name="contact_number"
+              pattern="[0-9]{10,12}"
+              required
+            />
+            <label for="contactNumber">Contact Number</label>
+          </div>
+          <!-- Store Address -->
+          <div class="form-floating mb-2">
+            <textarea
+              class="form-control"
+              id="storeAddress"
+              placeholder="Store Address"
+              name="store_address"
+              style="height: 50px"
+              required
+            ></textarea>
+            <label for="storeAddress">Store Address</label>
+          </div>
+          <!-- Upload Store Logo -->
+          <div class="mb-3">
+            <label for="storeLogo" class="form-label">Upload Store Logo</label>
+            <input
+              class="form-control"
+              type="file"
+              id="storeLogo"
+              name="store_logo"
+              accept="image/*"
+            />
+          </div>
+        <!-- Submit Button -->
+        <div class="mt-3">
+          <button type="submit" class="btn btn-primary w-100">Register Store</button>
+        </div>
+      </form>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+      <img src="src/img/bg design.png" alt="" width="550px" />
+    </div>
+  </body>
+</html>

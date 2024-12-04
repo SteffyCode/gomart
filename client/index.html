@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoMart</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar shadow-sm bg-white fixed-top">
+      <div class="container">
+        <div class="d-flex align-items-center w-100">
+          <!-- Left side: Toggler and Logo -->
+          <div class="d-flex align-items-center">
+            <!-- Offcanvas Toggle Button -->
+            <button
+              class="navbar-toggler border-0"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Logo -->
+            <a class="navbar-brand ms-3" href="index.html">
+              <img
+                src="src/img/logo.png"
+                alt="GoMart Logo"
+                width="100"
+                height="auto"
+              />
+            </a>
+          </div>
+
+          <!-- Right side: Nav item, Search, Cart, Profile -->
+          <div class="d-flex align-items-center ms-auto">
+            <!-- Nav items -->
+            <div class="nav-item mx-3">
+              <a class="nav-link active" href="#">Home</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">Vendors</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">All Products</a>
+            </div>
+
+            <!-- Search Form -->
+            <form class="d-none d-md-flex" role="search">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-primary" type="submit">
+                  Search
+                </button>
+              </div>
+            </form>
+
+            <!-- Cart Icon -->
+            <a href="cart.html" class="position-relative ms-3">
+              <img
+                src="src/icon/grocery-store.png"
+                alt="cart"
+                width="20"
+                height="20"
+              />
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >
+                0
+              </span>
+            </a>
+
+            <!-- Profile Picture -->
+            <div class="mx-3">
+              <img
+                class="rounded-circle border"
+                src="src/img/avatar.png"
+                alt="Profile"
+                width="30"
+                height="30"
+              />
+            </div>
+
+            <!-- Login Button -->
+            <a href="login.html" class="btn btn-primary text-white px-3">
+              Login
+            </a>
+          </div>
+        </div>
+
+        <!-- Offcanvas Sidebar -->
+        <div
+          class="offcanvas offcanvas-start"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              Management
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav">
+              <li class="nav-item py-2">
+                <a class="nav-link d-flex align-items-center" href="#">
+                  <i class="bi bi-speedometer2 me-3"></i>
+                  Dashboard
+                </a>
+              </li>
+              <li class="nav-item py-2">
+                <a class="nav-link d-flex align-items-center" href="#">
+                  <i class="bi bi-box me-3"></i>
+                  Inventory
+                </a>
+              </li>
+              <li class="nav-item py-2">
+                <a class="nav-link d-flex align-items-center" href="#">
+                  <i class="bi bi-arrow-repeat me-3"></i>
+                  Request Order
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content">
+      <div class="container mt-3">
+        <h1 class="display-6 fw-bold">Welcome to GoMart</h1>
+        <p>Your one-stop shop for all your grocery needs</p>
+        <a href="products.html" class="btn btn-primary">Shop Now</a>
+      </div>
+    </main>
+  </body>
+</html>

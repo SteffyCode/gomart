@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoMart</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar shadow-sm bg-white fixed-top">
+      <div class="container">
+        <div class="d-flex align-items-center w-100">
+          <!-- Left side: Toggler and Logo -->
+          <div class="d-flex align-items-center">
+            <!-- Offcanvas Toggle Button -->
+            <button
+              class="navbar-toggler border-0"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Logo -->
+            <a class="navbar-brand ms-3" href="index.html">
+              <img
+                src="src/img/logo.png"
+                alt="GoMart Logo"
+                width="100"
+                height="auto"
+              />
+            </a>
+          </div>
+
+          <!-- Right side: Nav item, Search, Cart, Profile -->
+          <div class="d-flex align-items-center ms-auto">
+            <!-- Nav items -->
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">Home</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="#">Stores</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link active" href="#">All Products</a>
+            </div>
+
+            <!-- Search Form -->
+            <form class="d-none d-md-flex" role="search">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-primary" type="submit">
+                  Search
+                </button>
+              </div>
+            </form>
+
+            <!-- Cart Icon -->
+            <a href="cart.html" class="position-relative ms-3">
+              <img
+                src="src/icon/grocery-store.png"
+                alt="cart"
+                width="20"
+                height="20"
+              />
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >
+                0
+              </span>
+            </a>
+
+            <!-- Profile Picture -->
+            <div class="mx-3">
+              <img
+                class="rounded-circle border"
+                src="src/img/avatar.png"
+                alt="Profile"
+                width="30"
+                height="30"
+              />
+            </div>
+
+            <!-- Login Button -->
+            <a href="login.html" class="btn btn-primary text-white px-3">
+              Login
+            </a>
+          </div>
+        </div>
+
+        <!-- Offcanvas Sidebar -->
+        <div
+          class="offcanvas offcanvas-start"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              Management
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav">
+              <li class="nav-item py-2">
+                <a class="nav-link d-flex align-items-center" href="#">
+                  <i class="bi bi-speedometer2 me-3"></i>
+                  Dashboard
+                </a>
+              </li>
+              <li class="nav-item py-2">
+                <a class="nav-link d-flex align-items-center" href="#">
+                  <i class="bi bi-box me-3"></i>
+                  Inventory
+                </a>
+              </li>
+              <li class="nav-item py-2">
+                <a class="nav-link d-flex align-items-center" href="#">
+                  <i class="bi bi-arrow-repeat me-3"></i>
+                  Request Order
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+      <div class="row g-4">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+          <div class="sidebar p-4">
+            <h5 class="mb-4 fw-bold">Filter By</h5>
+            <div class="mb-4">
+              <p class="fw-bold text-primary mb-3">Product Types</p>
+              <div class="product-types">
+                <div class="form-check mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="beverages"
+                  />
+                  <label class="form-check-label" for="beverages"
+                    >Beverages</label
+                  >
+                </div>
+                <!-- ... other checkboxes with same structure ... -->
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="fish" />
+                  <label class="form-check-label" for="fish">Fish</label>
+                </div>
+                <a href="#" class="text-primary text-decoration-none"
+                  >See more</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product List -->
+        <div class="col-md-9">
+          <div class="bg-white p-4 rounded shadow-sm mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="mb-0 fw-500">Showing 1-36 Items</p>
+              <select class="form-select w-auto">
+                <option selected>Sort by Popularity</option>
+                <option>Newest Arrivals</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <!-- Product Card -->
+            <div class="col-md-4">
+              <div class="card h-100">
+                <img
+                  src="src/img/product.png"
+                  class="card-img-top"
+                  alt="Product Image"
+                />
+                <div class="card-body text-center">
+                  <h6 class="card-title mb-2">PRODUCT NAME</h6>
+                  <p class="card-text mb-3">$99.99</p>
+                  <button class="btn btn-outline-primary w-100">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Repeat for more products -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
