@@ -13,13 +13,12 @@
     <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-        <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar shadow-sm bg-white fixed-top">
       <div class="container">
         <div class="d-flex align-items-center w-100">
           <!-- Left side: Logo -->
           <div class="d-flex align-items-center">
-            
             <!-- Logo -->
             <a class="navbar-brand" href="index.html">
               <img
@@ -35,7 +34,7 @@
           <div class="d-flex align-items-center ms-auto">
             <!-- Nav items -->
             <div class="nav-item mx-3">
-              <a class="nav-link " href="#">Home</a>
+              <a class="nav-link" href="#">Home</a>
             </div>
             <div class="nav-item mx-3">
               <a class="nav-link" href="#">Vendors</a>
@@ -43,8 +42,8 @@
             <div class="nav-item mx-3">
               <a class="nav-link" href="#">All Products</a>
             </div>
-
-      
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -54,77 +53,159 @@
       style="width: 400px"
     >
       <span class="fw-bold fs-4">Register Your Store</span>
-      <p class="text-center">Complete the details below to register your store.</p>
+      <p class="text-center">
+        Complete the details below to register your store.
+      </p>
       <form id="sellerForm">
-        <!-- Store Name -->
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="storeName"
-              placeholder="Store Name"
-              name="store_name"
-              required
-            />
-            <label for="storeName">Store Name</label>
+        <!-- business type -->
+        <div class="form-floating mb-3">
+          <select
+            class="form-select"
+            id="businessType"
+            name="business_type"
+            required
+          >
+            <option value="" disabled selected>Select business type</option>
+            <option value="wholesaler">Vendor</option>
+            <option value="retail">Retail</option>
+          </select>
+          <label for="businessType">Business Type</label>
+        </div>
+
+        <!-- Business Name -->
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="businessName"
+            placeholder="Business Name"
+            name="business_name"
+            required
+          />
+          <label for="businessName">Business Name</label>
+        </div>
+
+        <!-- Business Number -->
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="businessNumber"
+                placeholder="Business Number"
+                name="business_number"
+                required
+              />
+              <label for="businessNumber">Business Number</label>
+            </div>
           </div>
-          <!-- Store Category -->
-          <div class="form-floating mb-3">
-            <select
-              class="form-select"
-              id="storeCategory"
-              name="store_category"
-              required
-            >
-              <option value="" disabled selected>Select Store Category</option>
-              <option value="Grocery">Grocery</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Clothing">Clothing</option>
-              <option value="Other">Other</option>
-            </select>
-            <label for="storeCategory">Store Category</label>
+
+          <!-- Phone Number -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="tel"
+                class="form-control"
+                id="phoneNumber"
+                placeholder="Phone Number"
+                name="phone_number"
+                pattern="[0-9]{10,12}"
+                required
+              />
+              <label for="phoneNumber">Phone Number</label>
+            </div>
           </div>
-          <!-- Contact Number -->
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="contactNumber"
-              placeholder="Contact Number"
-              name="contact_number"
-              pattern="[0-9]{10,12}"
-              required
-            />
-            <label for="contactNumber">Contact Number</label>
+        </div>
+
+        <!-- Business Address -->
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            id="businessAddress"
+            placeholder="Business Address"
+            name="business_address"
+            style="height: 50px"
+            required
+          ></textarea>
+          <label for="businessAddress">Business Address</label>
+        </div>
+
+        <!-- Country -->
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="country"
+                placeholder="Country"
+                name="country"
+                required
+              />
+              <label for="country">Country</label>
+            </div>
           </div>
-          <!-- Store Address -->
-          <div class="form-floating mb-2">
-            <textarea
-              class="form-control"
-              id="storeAddress"
-              placeholder="Store Address"
-              name="store_address"
-              style="height: 50px"
-              required
-            ></textarea>
-            <label for="storeAddress">Store Address</label>
+
+          <!-- Zip Code -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="zipcode"
+                placeholder="Zip Code"
+                name="zipcode"
+                pattern="[0-9]{4,10}"
+                required
+              />
+              <label for="zipcode">Zip Code</label>
+            </div>
           </div>
-          <!-- Upload Store Logo -->
-          <div class="mb-3">
-            <label for="storeLogo" class="form-label">Upload Store Logo</label>
-            <input
-              class="form-control"
-              type="file"
-              id="storeLogo"
-              name="store_logo"
-              accept="image/*"
-            />
+        </div>
+
+        <!-- City -->
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                placeholder="City"
+                name="city"
+                required
+              />
+              <label for="city">City</label>
+            </div>
           </div>
+
+          <!-- Operating Hours -->
+
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="operatingHours"
+                placeholder="Operating Hours (e.g., 9 AM - 9 PM)"
+                name="operating_hours"
+                required
+              />
+              <label for="operatingHours">Operating Hours</label>
+            </div>
+          </div>
+        </div>
+
         <!-- Submit Button -->
         <div class="mt-3">
-          <button type="submit" class="btn btn-primary w-100">Register Store</button>
+          <button type="submit" class="btn btn-primary w-100">Register</button>
         </div>
       </form>
+      <div class="mt-2">
+        Already have an account?
+        <a href="login.html" class="text-decoration-none"> Sign in.</a>
+      </div>
     </div>
     <div class="position-absolute bottom-0 end-0">
       <img src="src/img/bg design.png" alt="" width="550px" />

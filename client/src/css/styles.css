@@ -1,6 +1,6 @@
 .center {
   position: absolute;
-  top: 50%;
+  top: 52%;
   left: 35%;
   transform: translate(-50%, -50%);
 }
@@ -55,7 +55,8 @@ body {
 }
 
 .offcanvas.offcanvas-start {
-  width: 250px !important; /* Adjust this value to make it shorter/wider */
+  width: 250px !important;
+  /* Adjust this value to make it shorter/wider */
 }
 
 .offcanvas-title {
@@ -83,56 +84,7 @@ body {
   border-color: #dee2e6 #dee2e6 #e7f1ff;
 }
 
-.tab-pane {
-  width: 100%;
-}
 
-.table {
-  table-layout: fixed;
-  width: 100%;
-  border-radius: 0.25rem; /* rounded corners */
-}
-
-.table thead {
-  background-color: #ff0015;
-  color: white;
-}
-
-.table th:nth-child(1) {
-  width: 20%; /* Product Name */
-}
-
-.table th:nth-child(2) {
-  width: 15%; /* Vendor */
-}
-
-.table th:nth-child(3) {
-  width: 15%; /* Brand */
-}
-
-.table th:nth-child(4) {
-  width: 15%; /* Product Type */
-}
-
-.table th:nth-child(5) {
-  width: 10%; /* Quantity */
-}
-
-.table th:nth-child(6) {
-  width: 10%; /* Total Stocks */
-}
-
-.table th:nth-child(7) {
-  width: 10%; /* Price */
-}
-
-.table th:nth-child(8) {
-  width: 10%; /* Actions */
-}
-
-.table td {
-  word-wrap: break-word;
-}
 
 /* reorder request styles */
 .pagination .page-link {
@@ -151,6 +103,7 @@ body {
   background-color: #e7f1ff;
   border-color: #e7f1ff;
 }
+
 
 /* poducts styles */
 /* .product-types {

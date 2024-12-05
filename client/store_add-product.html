@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GoMart</title>
+    <title>Inventory - GoMart</title>
     <link rel="stylesheet" href="src/css/styles.css" />
     <link
       href="https://fonts.googleapis.com/css?family=League Spartan"
@@ -15,15 +15,19 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
     />
+    <style>
+      .custom-box-shadow {
+        box-shadow: 0 1px 8px 1px rgba(20, 113, 243, 0.5) !important;
+      }
+    </style>
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar shadow-sm bg-white fixed-top">
+    <nav class="navbar shadow-sm bg-white fixed-top custom-box-shadow">
       <div class="container">
         <div class="d-flex align-items-center w-100">
           <!-- Left side: Toggler and Logo -->
           <div class="d-flex align-items-center">
-            <!-- Offcanvas Toggle Button -->
             <button
               class="navbar-toggler border-0"
               type="button"
@@ -48,7 +52,6 @@
 
           <!-- Right side: Nav item, Search, Cart, Profile -->
           <div class="d-flex align-items-center ms-auto">
-            <!-- Nav items -->
             <div class="nav-item mx-3">
               <a class="nav-link" href="#">Home</a>
             </div>
@@ -133,7 +136,7 @@
               </li>
               <li class="nav-item py-2">
                 <a
-                  class="nav-link d-flex align-items-center"
+                  class="nav-link active d-flex align-items-center"
                   href="inventory-store.html"
                 >
                   <i class="bi bi-box me-3"></i>
@@ -142,7 +145,7 @@
               </li>
               <li class="nav-item py-2">
                 <a
-                  class="nav-link active align-items-center"
+                  class="nav-link d-flex align-items-center"
                   href="request_order-store.html"
                 >
                   <i class="bi bi-arrow-repeat me-3"></i>
@@ -157,137 +160,114 @@
 
     <!-- Main Content -->
     <main class="content">
-      <div class="container mt-3">
-        <h1 class="fw-bold">Request Order</h1>
-        <p>Track the status of your reorder requests and create new ones.</p>
-
-        <!-- Search and Filter -->
-        <div class="mb-3">
-          <form class="d-flex">
-            <div class="input-group">
-              <input
-                class="form-control"
-                type="search"
-                placeholder="Search requests by vendor, product, or status"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-primary" type="submit">
-                <i class="bi bi-search"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Reorder Requests Table -->
-        <div class="mb-2">
-          <table class="table table-striped rounded-2">
-            <thead class="bg-primary text-white">
-              <tr>
-                <th>Request ID</th>
-                <th>Product Name</th>
-                <th>Vendor</th>
-                <th>Quantity Ordered</th>
-                <th>Request Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Sample rows -->
-              <tr>
-                <td>#REQ001</td>
-                <td>Organic Apples</td>
-                <td>FreshFarms</td>
-                <td>50</td>
-                <td>2024-11-24</td>
-                <td><span class="badge bg-warning">Pending</span></td>
-                <td><a href="#" class="btn btn-sm btn-info">View</a></td>
-              </tr>
-              <tr>
-                <td>#REQ002</td>
-                <td>LED TV 42"</td>
-                <td>ElectroMax</td>
-                <td>20</td>
-                <td>2024-11-22</td>
-                <td><span class="badge bg-success">Delivered</span></td>
-                <td><a href="#" class="btn btn-sm btn-info">View</a></td>
-              </tr>
-              <tr>
-                <td>#REQ003</td>
-                <td>Denim Jacket</td>
-                <td>FashionCo</td>
-                <td>15</td>
-                <td>2024-11-20</td>
-                <td><span class="badge bg-danger">Declined</span></td>
-                <td><a href="#" class="btn btn-sm btn-info">View</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="d-flex justify-content-end mt-0">
-          <nav aria-label="Product pagination">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&#171;</span>
-                  <!-- Left double arrow -->
-                </a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&#187;</span>
-                  <!-- Right double arrow -->
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-        <!-- New Reorder Request Form -->
-        <div class="bg-light p-4 rounded-2">
-          <h3>Create a New Request</h3>
-          <form>
-            <div class="mb-3">
-              <label for="product" class="form-label">Product</label>
-              <select id="product" class="form-select" required>
-                <option value="" disabled selected>Select a product</option>
-                <option value="1">Organic Apples</option>
-                <option value="2">LED TV 42"</option>
-                <option value="3">Denim Jacket</option>
+      <div class="container mt-5">
+        <h1 class="fw-bold">Add New Product</h1>
+        <form id="add_inventory_form">
+          <div class="row">
+            <div class="col-md-6 mt-3">
+              <label for="getProductList" class="fw-bold">Product</label>
+              <select
+                name="product_id"
+                id="getProductList"
+                class="form-select"
+                required
+              >
+                <option value="" selected>Select product</option>
+                <option value="product_id">
+                  productName - Category - Brand - Vendor
+                </option>
               </select>
             </div>
-            <div class="mb-3">
-              <label for="vendor" class="form-label">Vendor</label>
-              <select id="vendor" class="form-select" required>
-                <option value="" disabled selected>Select a vendor</option>
-                <option value="FreshFarms">FreshFarms</option>
-                <option value="ElectroMax">ElectroMax</option>
-                <option value="FashionCo">FashionCo</option>
+            <div class="col-md-6 mt-3">
+              <label for="sectionList" class="fw-bold">Store Section</label>
+              <select
+                name="section"
+                id="sectionList"
+                class="form-select"
+                required
+              >
+                <option value="" selected>Select Store Section</option>
+                <option value="" selected>Select Store Section</option>
+                <option value="fresh produce">Fresh Produce</option>
+                <option value="dairy">Dairy</option>
+                <option value="bakery">Bakery</option>
+                <option value="meat seafood">Meat & Seafood</option>
+                <option value="frozen foods">Frozen Foods</option>
+                <option value="beverages">Beverages</option>
+                <option value="snacks">Snacks</option>
+                <option value="pantry">Pantry Items</option>
+                <option value="canned goods">Canned Goods</option>
+                <option value="spices condiments">Spices & Condiments</option>
+                <option value="cleaning supplies">Cleaning Supplies</option>
+                <option value="personal care">Personal Care</option>
+                <option value="pet supplies">Pet Supplies</option>
+                <option value="baby products">Baby Products</option>
+                <option value="pharmacy">Pharmacy</option>
+                <option value="household">Household Items</option>
+                <option value="alcohol">Alcohol</option>
+                <option value="health wellness">Health & Wellness</option>
+                <option value="organic products">Organic Products</option>
               </select>
             </div>
-            <div class="mb-3">
-              <label for="quantity" class="form-label">Quantity</label>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mt-3">
+              <label for="productPrice" class="fw-bold">Price</label>
               <input
                 type="number"
-                id="quantity"
+                id="productPrice"
+                name="price"
                 class="form-control"
-                placeholder="Enter quantity"
-                min="1"
+                step="0.01"
+                min="0"
                 required
               />
             </div>
-            <button type="submit" class="btn btn-primary">
-              Submit Request
-            </button>
-          </form>
-        </div>
+            <div class="col-md-6 mt-3">
+              <label for="productQuantity" class="fw-bold">Quantity</label>
+              <input
+                type="number"
+                id="productQuantity"
+                name="quantity"
+                min="1"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mt-3">
+              <label for="reorderLevel" class="fw-bold">Reorder Level</label>
+              <input
+                type="number"
+                id="reorderLevel"
+                name="reorder_level"
+                min="0"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col-md-6 mt-3">
+              <label for="reorderAlertQuantity" class="fw-bold"
+                >Reorder Alert Quantity</label
+              >
+              <input
+                type="number"
+                id="reorderAlertQuantity"
+                name="reorder_alert"
+                min="0"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div class="mt-3 d-flex justify-content-end">
+            <a href="store_inventory.html" class="btn btn-secondary me-2">
+              Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">Add Product</button>
+          </div>
+        </form>
       </div>
     </main>
   </body>

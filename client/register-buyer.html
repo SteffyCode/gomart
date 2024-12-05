@@ -13,13 +13,12 @@
     <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-        <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar shadow-sm bg-white fixed-top">
       <div class="container">
         <div class="d-flex align-items-center w-100">
           <!-- Left side: Logo -->
           <div class="d-flex align-items-center">
-            
             <!-- Logo -->
             <a class="navbar-brand" href="index.html">
               <img
@@ -35,7 +34,7 @@
           <div class="d-flex align-items-center ms-auto">
             <!-- Nav items -->
             <div class="nav-item mx-3">
-              <a class="nav-link " href="#">Home</a>
+              <a class="nav-link" href="#">Home</a>
             </div>
             <div class="nav-item mx-3">
               <a class="nav-link" href="#">Stores</a>
@@ -43,28 +42,94 @@
             <div class="nav-item mx-3">
               <a class="nav-link" href="#">All Products</a>
             </div>
-
-      
+          </div>
+        </div>
       </div>
     </nav>
 
-
     <!-- Content -->
-    <div class="center bg-white text-center rounded-4" style="width: 350px">
- 
-      <span class="fw-bold fs-4 ">Buyer Information</span>
-      <form id="buyerForm">
-        <div class="form-floating mb-3 mt-3">
+    <div class="center bg-white text-center rounded-4" style="width: 400px">
+      <span class="fw-bold fs-4">Buyer Information</span>
+      <p class="text-center">
+        Complete the details below to register as a buyer.
+      </p>
+      <form id="customer_registration_form">
+        <!-- Email -->
+        <div class="form-floating mb-3 mt-2">
           <input
-            type="text"
+            type="email"
             class="form-control"
-            id="fullName"
-            placeholder="Full Name"
-            name="full_name"
+            id="email"
+            placeholder="Email"
+            name="email"
             required
           />
-          <label for="fullName">Full Name</label>
+          <label for="email">Email</label>
         </div>
+
+        <!-- Password -->
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+                name="password"
+                minlength="8"
+                required
+              />
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <!-- Confirm Password -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                name="confirm_password"
+                minlength="8"
+                required
+              />
+              <label for="confirmPassword">Confirm Password</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- first name and last name in the same line -->
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                placeholder="First Name"
+                name="first_name"
+                required
+              />
+              <label for="firstName">First Name</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                placeholder="Last Name"
+                name="last_name"
+                required
+              />
+              <label for="lastName">Last Name</label>
+            </div>
+          </div>
+        </div>
+        <!-- Phone Number -->
         <div class="form-floating mb-3">
           <input
             type="tel"
@@ -76,6 +141,8 @@
           />
           <label for="phoneNumber">Phone Number</label>
         </div>
+
+        <!-- Address -->
         <div class="form-floating mb-3">
           <input
             type="text"
@@ -87,24 +154,15 @@
           />
           <label for="address">Address</label>
         </div>
-        <div class="mb-3">
-          <label for="profilePicture" class="form-label">Profile Picture</label>
-          <input
-            type="file"
-            class="form-control"
-            id="profilePicture"
-            name="profile_picture"
-            accept="image/*"
-          />
-          <small class="text-muted"
-            >Leave empty to use the default profile picture.</small
-          >
-        </div>
+
         <div class="mt-3">
           <button type="submit" class="btn btn-primary w-100">Register</button>
         </div>
       </form>
-    </div>
+      <div class="mt-2">
+        Already have an account?
+        <a href="login.html" class="text-decoration-none"> Sign in.</a>
+      </div>
     </div>
     <div class="position-absolute bottom-0 end-0">
       <img src="src/img/bg design.png" alt="" width="550px" />
