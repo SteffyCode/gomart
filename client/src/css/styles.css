@@ -24,6 +24,26 @@ body {
   border-color: #0275d8;
 }
 
+/* index */
+.cover-image {
+  background-image: url("../img/GOMart.png");
+  width: 1125px;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+.shopnow {
+  background-color: #3498db;
+  font-size: 400px;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 11rem;
+  margin-left: 21rem;
+}
+
 /* Navbar Styles */
 .nav-link {
   color: #2c3e50;
@@ -114,8 +134,17 @@ body {
   font-weight: bold;
 }
 
-.card img {
-  height: 120px;
-  width: 100%;
+.card-img-top {
   object-fit: cover;
+  border: 1px solid #1471f3;
+  width: 220px !important;
+  height: 150px !important;
+}
+
+.image-store {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #1471f3;
 }
