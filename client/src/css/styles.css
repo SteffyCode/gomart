@@ -84,8 +84,6 @@ body {
   border-color: #dee2e6 #dee2e6 #e7f1ff;
 }
 
-
-
 /* reorder request styles */
 .pagination .page-link {
   color: #0d6efd;
@@ -104,12 +102,7 @@ body {
   border-color: #e7f1ff;
 }
 
-
-/* poducts styles */
-/* .product-types {
-  height: 250px;
-  overflow-y: auto;
-}
+/* poducts styles  */
 
 .sidebar {
   font-size: 14px;
@@ -126,11 +119,3 @@ body {
   width: 100%;
   object-fit: cover;
 }
-
-.card-text {
-  font-size: 12px;
-}
-
-.card-body {
-  padding: 1px 10 0 10px;
-} */
