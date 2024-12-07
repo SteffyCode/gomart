@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="src/js/auth/register-seller.js"></script>
     <style>
       .custom-box-shadow {
         box-shadow: 0 1px 8px 1px rgba(20, 113, 243, 0.5) !important;
@@ -40,7 +41,7 @@
 
     <!-- Content -->
     <div
-      class="center bg-white text-center rounded-4 mt-4"
+      class="center bg-white text-center rounded-4 mt-4 pt-5"
       style="width: 400px"
     >
       <span class="fw-bold fs-4">Register Your Store</span>
@@ -48,6 +49,60 @@
         Complete the details below to register your store.
       </p>
       <form id="sellerForm">
+        <div class="d-flex">
+          <!-- Email -->
+          <div class="form-floating mb-3 me-3">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              name="email"
+              required
+            />
+            <label for="email">Email</label>
+          </div>
+          <!-- Password -->
+          <div class="form-floating mb-3">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              name="password"
+              required
+              minlength="8"
+            />
+            <label for="password">Password</label>
+          </div>
+        </div>
+
+        <div class="d-flex">
+          <!-- Confirm Password -->
+          <div class="form-floating mb-3 me-3">
+            <input
+              type="password"
+              class="form-control"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              name="password_confirmation"
+              required
+            />
+            <label for="confirmPassword">Confirm Password</label>
+          </div>
+          <!-- Business Name -->
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="businessName"
+              placeholder="Business Name"
+              name="business_name"
+              required
+            />
+            <label for="businessName">Business Name</label>
+          </div>
+        </div>
         <!-- business type -->
         <div class="form-floating mb-3">
           <select
@@ -57,23 +112,10 @@
             required
           >
             <option value="" disabled selected>Select business type</option>
-            <option value="wholesaler">Vendor</option>
-            <option value="retail">Retail</option>
+            <option value="Vendor">Vendor</option>
+            <option value="Retail">Retail</option>
           </select>
           <label for="businessType">Business Type</label>
-        </div>
-
-        <!-- Business Name -->
-        <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="businessName"
-            placeholder="Business Name"
-            name="business_name"
-            required
-          />
-          <label for="businessName">Business Name</label>
         </div>
 
         <!-- Business Number -->
@@ -101,7 +143,7 @@
                 id="phoneNumber"
                 placeholder="Phone Number"
                 name="phone_number"
-                pattern="[0-9]{10,12}"
+                value="63 9"
                 required
               />
               <label for="phoneNumber">Phone Number</label>
@@ -190,7 +232,12 @@
 
         <!-- Submit Button -->
         <div class="mt-3">
-          <button type="submit" class="btn btn-primary w-100">Register</button>
+          <button
+            type="submit"
+            class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+          >
+            Register
+          </button>
         </div>
       </form>
       <div class="mt-2">
