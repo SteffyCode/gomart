@@ -120,7 +120,7 @@ function getAllRequestDataHTML(req, i, product, vendor) {
                 }">${req.status}</span></td>
                 <td>
                 ${
-                  req.status !== "Shipped" || req.status !== "Delivered"
+                  req.status !== "Shipped" && req.status !== "Delivered"
                     ? `<button href="#" class="btn btn-sm btn-outline-primary me-1" data-id="${req.reorder_id}" data-bs-toggle="modal" data-bs-target="#updateProduct${req.reorder_id}">Update</a>`
                     : ``
                 }
