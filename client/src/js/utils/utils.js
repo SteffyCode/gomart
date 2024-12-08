@@ -1,3 +1,7 @@
+import { setRouter } from "../router/router.js";
+
+setRouter();
+
 const backendURL = "http://ite19-backend.test";
 
 const headers = {

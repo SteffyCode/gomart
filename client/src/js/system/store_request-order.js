@@ -104,7 +104,9 @@ function getAllRequestDataHTML(req, i, product, vendor) {
                 <td>${req.created_at.split("T")[0]}</td>
                 <td>${
                   req.delivered_date === null
-                    ? `Delivering...`
+                    ? `Processing request...`
+                    : req.status === "Declined"
+                    ? `Declined Request`
                     : req.delivered_date
                 }</td>
                 <td><span class="badge ${
