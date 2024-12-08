@@ -23,10 +23,8 @@
     <nav class="navbar shadow-sm bg-white fixed-top custom-box-shadow">
       <div class="container">
         <div class="d-flex align-items-center w-100">
-          <!-- Left side: Toggler and Logo -->
+          <!-- Left side: Logo -->
           <div class="d-flex align-items-center">
-            <!-- Offcanvas Toggle Button -->
-
             <!-- Logo -->
             <a class="navbar-brand ms-3" href="index.html">
               <img
@@ -43,9 +41,6 @@
             <!-- Nav items -->
             <div class="nav-item mx-3">
               <a class="nav-link" href="index.html">Home</a>
-            </div>
-            <div class="nav-item mx-3">
-              <a class="nav-link" href="buyer_stores.html">Stores</a>
             </div>
             <div class="nav-item mx-3">
               <a class="nav-link active" href="buyer_products.html"
@@ -104,78 +99,81 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container py-4">
-      <div class="row g-4">
-        <!-- Sidebar -->
-        <div class="col-md-2 border rounded-2 border-end shadow-sm">
-          <div class="sidebar p-4">
-            <h5 class="mb-4 fw-bold">Filter By</h5>
-            <div class="mb-2">
-              <p class="fw-bold text-primary mb-2">Product Types</p>
-              <div class="product-types">
-                <form action="#">
-                  <div class="mb-2">
-                    <input
-                      type="radio"
-                      id=""
-                      name="fav_language"
-                      value=""
-                      class="me-1"
-                    />
-                    <label for="">Beverage</label>
-                    <br />
-                    <input
-                      type="radio"
-                      id=""
-                      name="fav_language"
-                      value=""
-                      class="me-1"
-                    />
-                    <label for="">Electronics</label>
-                  </div>
-                  <!-- Repeat for other options (supermarket section) -->
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Product List -->
-        <div class="col-md-10 border shadow-sm p-2">
-          <div class="bg-white p-4 rounded shadow-sm mb-4">
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="mb-0 fw-500">Showing 1-36 Items</p>
-              <select class="form-select w-auto">
-                <option selected>Sort by Popularity</option>
-                <option>Newest Arrivals</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row g-4">
-            <!-- Product Card -->
-            <div class="col-md-4">
-              <div class="card h-100">
-                <img
-                  src="src/img/product.png"
-                  class="card-img-top"
-                  alt="Product Image"
-                />
-                <div class="card-body text-center">
-                  <h6 class="card-title mb-2">PRODUCT NAME</h6>
-                  <p class="card-text mb-3">$99.99</p>
-                  <button class="btn btn-outline-primary w-100">
-                    Add to Cart
-                  </button>
+    <main class="content">
+      <div class="container mt-3">
+        <div class="row g-4">
+          <!-- Sidebar -->
+          <div class="col-md-2 border rounded-start-2 border-end shadow-sm">
+            <div class="sidebar p-4">
+              <h5 class="mb-4 fw-bold">Filter By</h5>
+              <div class="mb-2">
+                <p class="fw-bold text-primary mb-2">Product Types</p>
+                <div class="product-types">
+                  <form action="#">
+                    <div class="mb-2">
+                      <input
+                        type="radio"
+                        id=""
+                        name="fav_language"
+                        value=""
+                        class="me-1"
+                      />
+                      <label for="">Beverage</label>
+                      <br />
+                      <input
+                        type="radio"
+                        id=""
+                        name="fav_language"
+                        value=""
+                        class="me-1"
+                      />
+                      <label for="">Electronics</label>
+                    </div>
+                    <!-- Repeat for other options (supermarket section) -->
+                  </form>
                 </div>
               </div>
             </div>
-            <!-- Repeat for more products -->
+          </div>
+
+          <!-- Product List -->
+          <div class="col-md-10 border shadow-sm p-2">
+            <div class="bg-white p-2 rounded shadow-sm mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0 fw-500">Showing 1-36 Items</p>
+                <select class="form-select w-auto">
+                  <option selected>Sort by Popularity</option>
+                  <option>Newest Arrivals</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row row-cols-lg-4 g-3">
+              <!-- Product Card -->
+              <div class="col">
+                <div class="card h-80">
+                  <img
+                    src="src/img/product.png"
+                    class="card-img-top"
+                    alt="Product Image"
+                  />
+                  <div class="card-body text-center">
+                    <h6 class="card-title mb-1">PRODUCT NAME</h6>
+                    <p class="card-text mb-1">$99.99</p>
+                    <button class="btn btn-outline-primary w-100">
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Repeat for more products -->
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </body>
 </html>

@@ -22,7 +22,7 @@
     <nav class="navbar shadow-sm bg-white fixed-top custom-box-shadow">
       <div class="container">
         <div class="d-flex align-items-center w-100">
-          <!-- Left side: Toggler and Logo -->
+          <!-- Left side: Logo -->
           <div class="d-flex align-items-center">
             <!-- Logo -->
             <a class="navbar-brand ms-3" href="index.html">
@@ -40,9 +40,6 @@
             <!-- Nav items -->
             <div class="nav-item mx-3">
               <a class="nav-link active" href="index.html">Home</a>
-            </div>
-            <div class="nav-item mx-3">
-              <a class="nav-link" href="buyer_stores.html">Stores</a>
             </div>
             <div class="nav-item mx-3">
               <a class="nav-link" href="buyer_products.html">All Products</a>
@@ -101,9 +98,36 @@
     <!-- Main Content -->
     <main class="content">
       <div class="container mt-3">
-        <h1 class="display-6 fw-bold">Welcome to GoMart</h1>
-        <p>Your one-stop shop for all your grocery needs</p>
-        <a href="products.html" class="btn btn-primary">Shop Now</a>
+        <div class="cover-image">
+          <a href="buyer_products.html" class="btn btn-primary shopnow"
+            >Shop Now</a
+          >
+        </div>
+
+        <!-- registered stores-->
+        <h4 class="fw-bold text-center mt-3 mb-2">
+          Discover all the registered stores available at GoMart
+        </h4>
+
+        <!-- Store Cards -->
+        <div class="row row-cols-lg-6 g-2">
+          <!-- Store 1 -->
+          <div class="col">
+            <div class="card text-center border-0">
+              <div class="card-body p-2">
+                <img
+                  src="src/img/SM.jpg"
+                  alt="Store 1 Logo"
+                  class="mb-3 image-store"
+                />
+                <h5 class="card-title mb-0">SM Supermarket</h5>
+                <p class="text-muted">Fresh Produce & More</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- for more stores -->
+        </div>
       </div>
     </main>
   </body>
