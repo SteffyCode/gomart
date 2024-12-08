@@ -1,4 +1,6 @@
-import { backendURL, headers } from "../utils/utils.js";
+import { backendURL, headers, userlogged } from "../utils/utils.js";
+
+userlogged();
 
 async function getDatas(url = "", keyword) {
   const getAllRequest = document.getElementById("getAllRequests");
@@ -15,10 +17,10 @@ async function getDatas(url = "", keyword) {
   const productResponse = await fetch(backendURL + "/api/product/all", {
     headers,
   });
-  const storeResponse = await fetch(backendURL + "/api/user", { headers });
+  const vendorResponse = await fetch(backendURL + "/api/user", { headers });
 
-  if (!storeResponse.ok) {
-    throw new Error(`HTTP error! status: ${storeResponse.status}`);
+  if (!vendorResponse.ok) {
+    throw new Error(`HTTP error! status: ${vendorResponse.status}`);
   }
   if (!productResponse.ok) {
     throw new Error(`HTTP error! status: ${productResponse.status}`);
@@ -29,29 +31,30 @@ async function getDatas(url = "", keyword) {
 
   const requestData = await requestResponse.json();
   const productData = await productResponse.json();
-  const storeData = await storeResponse.json();
+  const vendorData = await vendorResponse.json();
 
   if (requestResponse.ok) {
     let requestHTML = "",
       hasrequest = false,
       i = 0;
 
-    requestData.data.forEach((req) => {
+    requestData?.data?.forEach((req) => {
       hasrequest = true;
-      const store = storeData.find((store) => store.id === req.store_id);
       const product = productData.find(
         (product) => product.product_id === req.product_id
       );
+      const vendor = vendorData.find((vendor) => vendor.id === req.vendor_id);
+
       i++;
 
-      requestHTML += getAllRequestDataHTML(req, i, product, store);
+      requestHTML += getAllRequestDataHTML(req, i, product, vendor);
     });
 
-    getAllRequest.innerHTML = requestHTML;
-
     if (!hasrequest) {
-      requestHTML = "<tr><td colspan='9'>No requests found.</td></tr>";
+      requestHTML = `<tr><td colspan='9'>No requests found. Create request by clicking "Order Product" button</td></tr>`;
     }
+
+    getAllRequest.innerHTML = requestHTML;
 
     let pagination = "";
     if (requestData.links) {
@@ -91,10 +94,10 @@ async function getDatas(url = "", keyword) {
   }
 }
 
-function getAllRequestDataHTML(req, i, product, store) {
+function getAllRequestDataHTML(req, i, product, vendor) {
   return `<tr>
                 <td>#REQ00${i}</td>
-                <td>${store.business_name}</td>
+                <td>${vendor.business_name}</td>
                 <td>${product.product_name}</td>
                 <td>${req.order_type}</td>
                 <td>${req.quantity}</td>
@@ -115,7 +118,7 @@ function getAllRequestDataHTML(req, i, product, store) {
                 }">${req.status}</span></td>
                 <td>
                 ${
-                  req.status !== "Shipped"
+                  req.status !== "Shipped" || req.status !== "Delivered"
                     ? `<button href="#" class="btn btn-sm btn-outline-primary me-1" data-id="${req.reorder_id}" data-bs-toggle="modal" data-bs-target="#updateProduct${req.reorder_id}">Update</a>`
                     : ``
                 }
@@ -123,12 +126,12 @@ function getAllRequestDataHTML(req, i, product, store) {
                     req.reorder_id
                   }">Delete</button>
 
-                  ${getUpdateModal(req)}
+                  ${getUpdateModal(req, product)}
                 </td>
               </tr>`;
 }
 
-function getUpdateModal(req) {
+function getUpdateModal(req, product) {
   return `    
   <!-- Modal -->
     <div
@@ -144,16 +147,10 @@ function getUpdateModal(req) {
             <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
               Update Request
             </h1>
-            <button
-              type="button"
-              class="btn-close"
-              id="closeButton${req.reorder_id}"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
+          <div class="ms-3 mt-2">Per Item Price (Php ${product?.selling_price})</div>
+          <div class="ms-3 mt-2">Wholesale Price (Php ${product?.wholesale_price})</div>
           <form id="update_request${req.reorder_id}">
-
             <div class="modal-body">                
               <div class="row">
                 <div class="col-md-12">
@@ -189,6 +186,7 @@ function getUpdateModal(req) {
                 type="button"
                 class="btn btn-secondary"
                 data-bs-dismiss="modal"
+                id="closeButton${req.reorder_id}"
               >
                 Close
               </button>
@@ -198,6 +196,64 @@ function getUpdateModal(req) {
         </div>
       </div>
     </div>`;
+}
+
+async function createRequest() {
+  const getProductList = document.getElementById("getProductList");
+
+  const productList = await fetch(backendURL + "/api/product/all", {
+    headers,
+  });
+  const vendorList = await fetch(backendURL + "/api/user", {
+    headers,
+  });
+
+  if (!productList.ok) {
+    throw new Error(`HTTP error! status: ${productList.status}`);
+  }
+
+  const productData = await productList.json();
+  const vendorData = await vendorList.json();
+
+  console.log(productData);
+  let productHTML = "";
+  productData.forEach((product) => {
+    const vendor = vendorData.find((vendor) => vendor.id === product.vendor_id);
+
+    productHTML += `<option value="${product.product_id}">${product.product_name} - Per Item(Php ${product.selling_price}) - Wholesale(Php ${product.wholesale_price}) - ${vendor.business_name}</option>`;
+  });
+
+  getProductList.innerHTML = productHTML;
+
+  const requestForm = document.getElementById("create_request_form");
+
+  requestForm.onsubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(requestForm);
+
+    const product = productData.find(
+      (item) => item.product_id === parseInt(formData.get("product_id"))
+    );
+
+    formData.append("vendor_id", product.vendor_id);
+
+    const response = await fetch(backendURL + "/api/reorder-request", {
+      method: "POST",
+      headers,
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    if (response.ok) {
+      alert("Request created successfully!");
+      document.querySelector("#closeButton").click();
+      requestForm.reset();
+      await getDatas();
+    }
+  };
 }
 
 const search_form = document.getElementById("search_form");
@@ -297,3 +353,4 @@ async function updateInfo(id) {
 }
 
 getDatas();
+createRequest();

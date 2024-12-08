@@ -166,7 +166,17 @@
       <div class="container mt-3">
         <h1 class="fw-bold">Request Order</h1>
         <p>Track the status of your reorder requests and create new ones.</p>
-
+        <div class="d-flex my-2 justify-content-end">
+          <a
+            href="store_add_request.html"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#createRequestModal"
+            aria-controls="createRequestModal"
+          >
+            <i class="bi bi-plus-lg"></i> Order Product
+          </a>
+        </div>
         <!-- Search and Filter -->
         <div class="mb-3">
           <form id="search_form" class="d-flex">
@@ -191,7 +201,7 @@
             <thead class="bg-primary text-white">
               <tr>
                 <th>#</th>
-                <th>Requested By</th>
+                <th>Requested to</th>
                 <th>Product Name</th>
                 <th>Order Type</th>
                 <th>Quantity Ordered</th>
@@ -213,9 +223,84 @@
             <ul class="pagination" id="pages"></ul>
           </nav>
         </div>
-
-        <!-- New Reorder Request Form -->
       </div>
     </main>
+
+    <!-- Create Request Modal -->
+    <div
+      class="modal fade"
+      id="createRequestModal"
+      tabindex="-1"
+      aria-labelledby="createRequestModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="createRequestModalLabel">
+              Create Request Order
+            </h5>
+          </div>
+          <form id="create_request_form">
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <!-- Hidden Store ID -->
+              <input type="hidden" name="store_id" id="business_id" />
+              <!-- Request Type -->
+              <div class="mb-3 fw-bold">
+                <label for="product_id" class="form-label">Product</label>
+                <select
+                  class="form-select"
+                  id="getProductList"
+                  name="product_id"
+                  required
+                ></select>
+              </div>
+
+              <!-- Order Type -->
+              <div class="mb-3 fw-bold">
+                <label for="order_type" class="form-label">Order Type</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="order_type"
+                  name="order_type"
+                  placeholder="Enter order type"
+                  required
+                />
+              </div>
+
+              <!-- Quantity -->
+              <div class="mb-3 fw-bold">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quantity"
+                  name="quantity"
+                  placeholder="Enter quantity"
+                  min="1"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                id="closeButton"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

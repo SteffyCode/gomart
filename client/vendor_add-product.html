@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
     />
+    <script type="module" src="src/js/system/vendor_add-products.js"></script>
     <style>
       .custom-box-shadow {
         box-shadow: 0 1px 8px 1px rgba(20, 113, 243, 0.5) !important;
@@ -160,11 +161,11 @@
 
     <!-- Main Content -->
     <main class="content">
-      <div class="container mt-5">
+      <div class="container mt-4">
         <h1 class="fw-bold">Add New Product</h1>
         <form id="add_product_form">
           <!-- Product Details Form -->
-
+          <input type="hidden" name="vendor_id" id="business_id" />
           <div class="row">
             <div class="col-md-6 mt-3">
               <label for="productName" class="fw-bold">Product Name</label>
@@ -177,20 +178,6 @@
               />
             </div>
             <div class="col-md-6 mt-3">
-              <label for="productPrice" class="fw-bold">Price</label>
-              <input
-                type="number"
-                id="productPrice"
-                name="product_price"
-                class="form-control"
-                step="0.01"
-                min="0"
-                required
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mt-3">
               <label for="productType" class="fw-bold">Product Type</label>
               <input
                 type="text"
@@ -200,31 +187,102 @@
                 required
               />
             </div>
+          </div>
+          <div class="row">
             <div class="col-md-6 mt-3">
               <label for="productBrand" class="fw-bold">Brand</label>
               <input
                 type="text"
                 id="productBrand"
-                name="product_brand"
+                name="brand"
                 class="form-control"
+                required
+              />
+            </div>
+            <div class="col-md-6 mt-3">
+              <label for="productPrice" class="fw-bold">Item Price</label>
+              <input
+                type="number"
+                id="selling_price"
+                name="selling_price"
+                class="form-control"
+                step="0.01"
+                min="0"
                 required
               />
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12 mt-3">
-              <label for="productImage" class="fw-bold">Product Image</label>
+            <div class="col-md-6 mt-3">
+              <label for="productType" class="fw-bold">Cost Price</label>
               <input
-                type="file"
-                id="productImage"
-                name="product_image"
+                type="number"
+                id="cost_price"
+                name="cost_price"
                 class="form-control"
-                accept="image/*"
+                step="0.01"
+                required
+              />
+            </div>
+            <div class="col-md-6 mt-3">
+              <label for="productBrand" class="fw-bold">Wholesale Price</label>
+              <input
+                type="number"
+                id="wholesale_price"
+                name="wholesale_price"
+                class="form-control"
+                step="0.01"
                 required
               />
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6 mt-3">
+              <label for="stock_quantity" class="fw-bold">Quantity</label>
+              <input
+                type="number"
+                id="stock_quantity"
+                name="stock_quantity"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col-md-6 mt-3">
+              <label for="section_name" class="fw-bold">Sections</label>
+              <select
+                id="section_name"
+                name="section_name"
+                class="form-control"
+                required
+              >
+                <option value="" disabled selected>Select a section</option>
+                <option value="Produce">Produce</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat & Seafood">Meat & Seafood</option>
+                <option value="Frozen Foods">Frozen Foods</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Household Items">Household Items</option>
+                <option value="Health & Beauty">Health & Beauty</option>
+                <option value="Canned Goods">Canned Goods</option>
+                <option value="Baby Products">Baby Products</option>
+                <option value="Pet Supplies">Pet Supplies</option>
+              </select>
+            </div>
+          </div>
 
+          <div class="col-md-12 mt-3">
+            <label for="productImage" class="fw-bold">Product Image</label>
+            <input
+              type="file"
+              id="productImage"
+              name="image_path"
+              class="form-control"
+              accept="image/*"
+              required
+            />
+          </div>
           <div class="row">
             <div class="col-md-12 mt-3">
               <label for="productDescription" class="fw-bold"
@@ -232,7 +290,7 @@
               >
               <textarea
                 id="productDescription"
-                name="product_description"
+                name="description"
                 class="form-control"
                 rows="3"
                 required

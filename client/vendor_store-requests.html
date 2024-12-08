@@ -15,7 +15,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
     />
- <style>
+    <script type="module" src="src/js/system/vendor_store-requests.js"></script>
+    <style>
       .custom-box-shadow {
         box-shadow: 0 1px 8px 1px rgba(20, 113, 243, 0.5) !important;
       }
@@ -65,7 +66,7 @@
               <a class="nav-link" href="#">All Products</a>
             </div>
 
-            <!-- Search Form -->
+            <!-- Search Form (visible only on medium screens and above) -->
             <form class="d-none d-md-flex" role="search">
               <div class="input-group">
                 <input
@@ -127,7 +128,7 @@
             ></button>
           </div>
           <div class="offcanvas-body">
-           <ul class="navbar-nav">
+            <ul class="navbar-nav">
               <li class="nav-item py-2">
                 <a
                   class="nav-link d-flex align-items-center"
@@ -138,7 +139,7 @@
               </li>
               <li class="nav-item py-2">
                 <a
-                  class="nav-link  d-flex align-items-center"
+                  class="nav-link d-flex align-items-center"
                   href="vendor_products.html"
                 >
                   <i class="bi bi-box-seam me-3"></i> Products
@@ -151,8 +152,8 @@
                 >
                   <i class="bi bi-arrow-repeat me-3"></i> Store Requests
                 </a>
-            </li>
-              
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -166,13 +167,14 @@
 
         <!-- Search and Filter -->
         <div class="mb-3">
-          <form class="d-flex">
+          <form id="search_form" class="d-flex">
             <div class="input-group">
               <input
                 class="form-control"
                 type="search"
-                placeholder="Search requests by vendor, product, or status"
+                placeholder="Search requests by order type, quantity, or status"
                 aria-label="Search"
+                name="keyword"
               />
               <button class="btn btn-outline-primary" type="submit">
                 <i class="bi bi-search"></i>
@@ -188,55 +190,24 @@
               <tr>
                 <th>Request ID</th>
                 <th>Product Name</th>
-                <th>Vendor</th>
+                <th>Section</th>
+                <th>Request by</th>
+                <th>Order Type</th>
                 <th>Quantity Ordered</th>
                 <th>Request Date</th>
+                <th>Delivered Date</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <!-- Sample rows -->
-              <tr>
-                <td>#REQ001</td>
-                <td>Organic Apples</td>
-                <td>FreshFarms</td>
-                <td>50</td>
-                <td>2024-11-24</td>
-                <td><span class="badge bg-warning">Pending</span></td>
-                <td>
-                  <button type="button" class="btn btn-sm btn-outline-success">Accept</button>
-                  <button type="button" class="btn btn-sm btn-outline-danger">Decline</button>
-                  <button type="button" class="btn btn-sm btn-primary">Mark as Delivered</button>
-                </td>
-              </tr>
-             
-            </tbody>
+            <tbody id="getRequests"></tbody>
           </table>
         </div>
 
         <!-- Pagination -->
         <div class="d-flex justify-content-end mt-0">
           <nav aria-label="Product pagination">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&#171;</span>
-                  <!-- Left double arrow -->
-                </a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&#187;</span>
-                  <!-- Right double arrow -->
-                </a>
-              </li>
-            </ul>
+            <ul class="pagination" id="pages"></ul>
           </nav>
         </div>
 
