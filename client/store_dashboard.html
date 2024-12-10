@@ -52,57 +52,13 @@
           </div>
 
           <!-- Right side: Nav item, Search, Cart, Profile -->
-          <div class="d-flex align-items-center ms-auto">
-            <!-- Nav items -->
-            <div class="nav-item mx-3">
-              <a class="nav-link active" href="#">Home</a>
-            </div>
-            <div class="nav-item mx-3">
-              <a class="nav-link" href="#">Vendors</a>
-            </div>
-            <div class="nav-item mx-3">
-              <a class="nav-link" href="#">All Products</a>
-            </div>
-
-            <!-- Search Form -->
-            <form class="d-none d-md-flex" role="search">
-              <div class="input-group">
-                <input
-                  class="form-control"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button class="btn btn-outline-primary" type="submit">
-                  Search
-                </button>
-              </div>
-            </form>
-
-            <!-- Cart Icon -->
-            <a href="cart.html" class="position-relative ms-3">
-              <img
-                src="src/icon/grocery-store.png"
-                alt="cart"
-                width="20"
-                height="20"
-              />
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-              >
-                0
-              </span>
-            </a>
-
+          <div class="d-flex align-items-center ms-auto" id="business_id">
             <!-- Profile Picture -->
-            <div class="mx-3">
-              <img
-                class="rounded-circle border"
-                src="src/img/avatar.png"
-                alt="Profile"
-                width="30"
-                height="30"
-              />
+            <div class="mx-3" id="loggedUser"></div>
+            <div>
+              <button class="btn btn-primary btn-sm" id="logout_button">
+                Logout
+              </button>
             </div>
           </div>
         </div>

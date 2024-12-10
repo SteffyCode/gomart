@@ -1,6 +1,12 @@
-import { backendURL, headers, userlogged } from "../utils/utils.js";
+import {
+  backendURL,
+  headers,
+  logoutbutton,
+  userlogged,
+} from "../utils/utils.js";
 
 userlogged();
+logoutbutton();
 
 const createProductForm = document.getElementById("add_product_form");
 

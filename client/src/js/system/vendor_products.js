@@ -1,4 +1,6 @@
-import { backendURL, headers } from "../utils/utils.js";
+import { backendURL, headers, logoutbutton } from "../utils/utils.js";
+
+logoutbutton();
 
 document.getElementById("sortSection").addEventListener("change", function () {
   getDatas("", "", this.value);

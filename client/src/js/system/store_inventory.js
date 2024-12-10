@@ -1,4 +1,11 @@
-import { backendURL, headers, userlogged } from "../utils/utils.js";
+import {
+  backendURL,
+  headers,
+  userlogged,
+  logoutbutton,
+} from "../utils/utils.js";
+
+logoutbutton();
 
 async function getDatas(url = "") {
   const getcategoryTabsContent = document.getElementById("categoryTabsContent");
@@ -39,7 +46,7 @@ async function getDatas(url = "") {
   const vendorDatas = await vendorResponse.json();
   const profileData = await profileResponse.json();
 
-  console.log(inventoryData, productDatas, vendorDatas);
+  console.log("mao ning inventory:", inventoryData);
 
   if (inventoryResponse.ok) {
     let inventoryHTML = "";

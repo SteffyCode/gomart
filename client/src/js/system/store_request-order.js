@@ -1,6 +1,12 @@
-import { backendURL, headers, userlogged } from "../utils/utils.js";
+import {
+  backendURL,
+  headers,
+  logoutbutton,
+  userlogged,
+} from "../utils/utils.js";
 
 userlogged();
+logoutbutton();
 
 async function getDatas(url = "", keyword) {
   const getAllRequest = document.getElementById("getAllRequests");
@@ -101,7 +107,7 @@ function getAllRequestDataHTML(req, i, product, vendor) {
                 <td>${product.product_name}</td>
                 <td>${req.order_type}</td>
                 <td>${req.quantity}</td>
-                <td>${req.created_at.split("T")[0]}</td>
+                <td>${req.created_at?.split("T")[0]}</td>
                 <td>${
                   req.delivered_date === null
                     ? `Processing request...`
