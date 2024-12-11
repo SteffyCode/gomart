@@ -13,10 +13,12 @@ async function getDatas() {
 
   const store = await storeRes.json();
 
+  const randomStores = store.sort(() => Math.random() - 0.5);
+
   let storeHTML = "",
     hasStore = false;
 
-  store.forEach((s) => {
+  randomStores.forEach((s) => {
     hasStore = true;
 
     console.log(s);

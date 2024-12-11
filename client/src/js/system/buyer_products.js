@@ -61,10 +61,12 @@ function filterProducts(productData, storeData, inventoryData) {
     'input[name="fav_language"]:checked'
   ).value;
 
+  const randominventory = inventoryData.sort(() => Math.random() - 0.5);
+
   let productHTML = "";
   let count = 0;
 
-  inventoryData.forEach((inventory) => {
+  randominventory.forEach((inventory) => {
     const product = productData.find(
       (p) => p.product_id === inventory.product_id
     );
