@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
     />
+    <script type="module" src="src/js/system/buyer_productDetails.js"></script>
     <style>
       .custom-box-shadow {
         box-shadow: 0 1px 8px 1px rgba(20, 113, 243, 0.5) !important;
@@ -51,21 +52,6 @@
               >
             </div>
 
-            <!-- Search Form -->
-            <form class="d-none d-md-flex" role="search">
-              <div class="input-group">
-                <input
-                  class="form-control"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button class="btn btn-outline-primary" type="submit">
-                  Search
-                </button>
-              </div>
-            </form>
-
             <!-- Cart Icon -->
             <a href="cart.html" class="position-relative ms-3">
               <img
@@ -81,87 +67,18 @@
               </span>
             </a>
 
-            <!-- Profile Picture -->
-            <div class="mx-3">
-              <img
-                class="rounded-circle border"
-                src="src/img/avatar.png"
-                alt="Profile"
-                width="30"
-                height="30"
-              />
-            </div>
-
-            <!-- Login Button -->
-            <a href="login.html" class="btn btn-primary text-white px-3">
-              Login
-            </a>
+            <span class="mx-3" id="loggedUser"
+              ><!-- Login Button -->
+              <a href="login.html" class="btn btn-primary text-white px-3">
+                Login
+              </a></span
+            >
           </div>
         </div>
       </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="content">
-      <div class="container mt-3">
-        <div class="card p-3 mb-2 mx-auto border-1" style="max-width: 900px">
-          <div class="row g-0">
-            <!-- Product Image -->
-            <div class="col-lg-6">
-              <img
-                src="src/img//product.png"
-                class="img-fluid rounded 1 shadow-sm"
-                alt="Product Image"
-                style="height: 300px; width: fit-content; object-fit: cover"
-              />
-            </div>
-            <!-- Product Details -->
-            <div class="col-lg-6">
-              <div class="card-body">
-                <!-- Product Name -->
-                <h4 class="fw-bold mb-3">Product Name</h4>
-                <!-- Product Price -->
-                <h6 class="text-primary fw-bold mb-3">Php 1000.00</h6>
-                <!-- Product Description -->
-                <p class="card-text text-muted">
-                  This is a detailed description of the product. Highlight its
-                  key features, uses, and benefits to give the customer all the
-                  information they need to make a purchase.
-                </p>
-                <!-- Product Quantity -->
-                <div class="d-flex align-items-center mb-4">
-                  <label for="quantity" class="me-2">Quantity:</label>
-                  <input
-                    type="number"
-                    id="quantity"
-                    class="form-control"
-                    value="1"
-                    style="width: 70px"
-                    min="1"
-                  />
-                </div>
-                <!-- Add to Cart Button -->
-                <div class="d-flex justify-content-end gap-2">
-                  <button class="btn btn-primary px-2">
-                    <i class="bi bi-cart3 pe-2"></i>Add to Cart
-                  </button>
-                  <button class="btn btn-primary px-2">
-                    <i class="bi bi-bag pe-1"></i> Buy Now
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Seller Information -->
-      <div class="card p-3 mx-auto pb-1 border-1" style="max-width: 900px">
-        <div class="row">
-          <div class="col-lg-12">
-            <h6 class="fw-bold">[SELLER NAME]</h6>
-          </div>
-        </div>
-      </div>
-    </main>
+    <main class="content" id="productDetails"></main>
   </body>
 </html>

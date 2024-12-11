@@ -67,7 +67,6 @@ async function userlogged() {
     if (profileData.role === "Customer") {
       userloggedIn.innerHTML = `
         <div id="loggedUser">
-          Welcome, ${profileData.first_name}!
           <img
             class="rounded-circle border mx-2"
             src="${

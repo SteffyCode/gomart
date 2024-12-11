@@ -11,7 +11,7 @@
     />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="src/js/utils/utils.js"></script>
+    <script type="module" src="src/js/system/index.js"></script>
     <style>
       .custom-box-shadow {
         box-shadow: 0 1px 8px 1px rgba(20, 113, 243, 0.5) !important;
@@ -76,7 +76,12 @@
               </span>
             </a>
 
-            <span class="mx-3" id="loggedUser"></span>
+            <span class="mx-3" id="loggedUser"
+              ><!-- Login Button -->
+              <a href="login.html" class="btn btn-primary text-white px-3">
+                Login
+              </a></span
+            >
           </div>
         </div>
       </div>
@@ -97,22 +102,7 @@
         </h4>
 
         <!-- Store Cards -->
-        <div class="row row-cols-lg-6 g-2">
-          <!-- Store 1 -->
-          <div class="col">
-            <div class="card text-center border-0">
-              <div class="card-body p-2">
-                <img
-                  src="src/img/SM.jpg"
-                  alt="Store 1 Logo"
-                  class="mb-3 image-store"
-                />
-                <h5 class="card-title mb-0">SM Supermarket</h5>
-                <p class="text-muted">Fresh Produce & More</p>
-              </div>
-            </div>
-          </div>
-
+        <div class="row row-cols-lg-6 g-2" id="getStores">
           <!-- for more stores -->
         </div>
       </div>
