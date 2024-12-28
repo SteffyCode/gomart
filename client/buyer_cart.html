@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Products</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="src/css/styles.css" />
     <link
       href="https://fonts.googleapis.com/css?family=League Spartan"
@@ -43,9 +43,7 @@
               <a class="nav-link" href="index.html">Home</a>
             </div>
             <div class="nav-item mx-3">
-              <a class="nav-link active" href="buyer_products.html"
-                >All Products</a
-              >
+              <a class="nav-link" href="buyer_products.html">All Products</a>
             </div>
 
             <!-- Search Form -->
@@ -88,44 +86,75 @@
       </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- main content -->
     <main class="content">
       <div class="container mt-3">
-        <div class="row g-4">
-          <!-- Sidebar -->
-          <div class="col-md-2 border rounded-start-2 border-end shadow-sm">
-            <div class="sidebar p-4">
-              <h5 class="mb-4 fw-bold">Filter By</h5>
-              <div class="mb-2">
-                <p class="fw-bold text-primary mb-2">Product Types</p>
-                <div class="product-types">
-                  <div class="mb-2" id="sectionNamelist"></div>
-                  <!-- Repeat for other options (supermarket section) -->
-                </div>
-              </div>
-            </div>
-          </div>
+        <h4 class="fw-bold">My Basket</h4>
 
-          <!-- Product List -->
-          <div class="col-md-10 border shadow-sm p-2">
-            <div class="bg-white p-2 rounded shadow-sm mb-4">
-              <div class="d-flex justify-content-between align-items-center">
-                <p class="mb-0 fw-500">
-                  Showing 1-<span id="productLength"></span> Items
-                </p>
-                <select class="form-select w-auto">
-                  <option selected>Sort by Price</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                </select>
-              </div>
-            </div>
+        <!-- Common Table Header -->
+        <div class="head">
+          <table class="table border mt-2">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
 
-            <div class="row row-cols-lg-4 g-3" id="listOfProducts">
-              <!-- Repeat for more products -->
-            </div>
+        <!-- Store Section 1 -->
+        <div class="store-section bg-light rounded-3">
+          <div class="p-2 pb-0 fs-6 fw-bold">Store Name</div>
+          <hr class="m-1" />
+          <table class="table table-light mb-2">
+            <tbody>
+              <tr>
+                <td>Magic Sarap</td>
+                <td>₱100.00</td>
+                <td>
+                  <input
+                    type="number"
+                    class="form-control"
+                    style="width: 50px"
+                    value="2"
+                  />
+                </td>
+                <td>₱200.00</td>
+                <td>
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+              </tr>
+              <!-- add row -->
+               <tr></tr>
+                <td>Spartan Slipper</td>
+                <td>₱100.00</td>
+                <td>
+                  <input
+                    type="number"
+                    class="form-control"
+                    style="width: 50px"
+                    value="1"
+                  />
+                </td>
+                <td>₱100.00</td>
+                <td>
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-end align-items-center pe-4">
+            <div class="me-3"><strong>TOTAL:</strong> ₱300.00</div>
+            <button class="btn btn-primary text-white me-5 mb-2 px-4">
+              Check Out
+            </button>
           </div>
         </div>
+        <br />
       </div>
     </main>
   </body>

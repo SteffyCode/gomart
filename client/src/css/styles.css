@@ -148,3 +148,33 @@ body {
   object-fit: cover;
   border: 2px solid #1471f3;
 }
+
+/* cart */
+
+.store-section table td:nth-child(1) {
+  width: 23%;
+}
+
+.store-section table td:nth-child(2) {
+  width: 20.5%;
+}
+.store-section table td:nth-child(3) {
+  width: 19.5%;
+}
+.store-section table td:nth-child(4) {
+  width: 22%;
+}
+
+/* checkout */
+
+.customer-address {
+  background-color: #e9ecef; /* Light gray background for address */
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.customer-address p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
