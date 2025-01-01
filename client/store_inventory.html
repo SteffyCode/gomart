@@ -42,7 +42,7 @@
             </button>
 
             <!-- Logo -->
-            <a class="navbar-brand ms-3" href="index.html">
+            <a class="navbar-brand ms-3" href="store_inventory.html">
               <img
                 src="src/img/logo.png"
                 alt="GoMart Logo"
@@ -205,10 +205,12 @@
             ></button>
           </div>
 
-          <!-- modal body -->
+          <!-- Modal Body -->
           <form id="add_inventory_form">
             <div class="modal-body">
               <input type="hidden" name="store_id" id="business_id" />
+
+              <!-- Product Selection -->
               <div class="row">
                 <div class="col-md-12 mt-3">
                   <label for="getProductList" class="fw-bold">Product</label>
@@ -217,9 +219,14 @@
                     id="getProductList"
                     class="form-select"
                     required
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Select a product from the list"
                   ></select>
                 </div>
               </div>
+
+              <!-- Pricing and Quantity -->
               <div class="row">
                 <div class="col-md-6 mt-3">
                   <label for="productPrice" class="fw-bold">Price</label>
@@ -231,6 +238,9 @@
                     step="0.01"
                     min="0"
                     required
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Specify the price of the product"
                   />
                 </div>
                 <div class="col-md-6 mt-3">
@@ -241,13 +251,20 @@
                     name="quantity"
                     min="1"
                     class="form-control"
-                    step="0.01"
+                    step="1"
                     required
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Enter the quantity to be added"
                   />
                 </div>
               </div>
+
+              <!-- Reorder Conditions -->
+              <br />
+              <strong class="fs-6 text-primary">Reorder Condition</strong>
               <div class="row">
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6">
                   <label for="reorderLevel" class="fw-bold"
                     >Reorder Level</label
                   >
@@ -257,27 +274,68 @@
                     name="reorder_level"
                     min="1"
                     class="form-control"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="left"
-                    data-bs-title="Level to reorder automatically"
                     required
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Minimum stock level before reordering is triggered"
                   />
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6">
                   <label for="reorderAlertQuantity" class="fw-bold"
                     >Reorder Alert Quantity</label
                   >
                   <input
                     type="number"
-                    id="reorderAlertQuantity"
+                    id="reorderAlertQuantityUnique"
                     name="reorder_quantity"
                     min="0"
                     class="form-control"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="left"
-                    data-bs-title="Level for alert of low quantity product"
                     required
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Threshold to send alerts for low stock levels"
                   />
+                </div>
+              </div>
+
+              <!-- Automatic Reorder Details -->
+              <br />
+              <strong class="fs-6 text-primary"
+                >Automatic Reorder Details</strong
+              >
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="autoReorderQty" class="fw-bold"
+                    >Auto Reorder Quantity</label
+                  >
+                  <input
+                    type="number"
+                    id="autoReorderQty"
+                    name="auto_order_quantity"
+                    min="1"
+                    class="form-control"
+                    required
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Quantity to be reordered automatically"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="reorderType" class="fw-bold">Reorder Type</label>
+                  <select
+                    id="reorderType"
+                    name="order_type"
+                    class="form-select"
+                    required
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Specify the reorder type"
+                  >
+                    <option value="" disabled selected>Select Type</option>
+                    <option value="Bulk">Bulk</option>
+                    <option value="Per Item">Per Item</option>
+                    <option value="Wholesale">Wholesale</option>
+                  </select>
                 </div>
               </div>
             </div>

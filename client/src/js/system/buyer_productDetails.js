@@ -5,10 +5,13 @@ async function getDatas() {
     const urlParams = new URLSearchParams(window.location.search);
     const inventoryId = urlParams.get("inventory");
 
-    const [inventoryShow, productRes, storeRes] = await Promise.all([
+    console.log(inventoryId);
+
+    const [inventoryShow, productRes, storeRes, userRes] = await Promise.all([
       fetch(`${backendURL}/api/inventory/${inventoryId}`, { headers }),
       fetch(`${backendURL}/api/product/all`, { headers }),
       fetch(`${backendURL}/api/user`, { headers }),
+      fetch(`${backendURL}/api/profile/show`, { headers }),
     ]);
 
     if (!inventoryShow.ok || !productRes.ok || !storeRes.ok) {
@@ -18,6 +21,7 @@ async function getDatas() {
     const inventoryData = await inventoryShow.json();
     const productDatas = await productRes.json();
     const storeDatas = await storeRes.json();
+    const customerData = await userRes.json();
 
     const product = productDatas.find(
       (p) => p.product_id === inventoryData.product_id
@@ -70,10 +74,21 @@ async function getDatas() {
                   />
                 </div>
                 <div class="d-flex justify-content-end gap-2">
-                  <button class="btn btn-primary px-2">
-                    <i class="bi bi-cart3 pe-2"></i>Add to Cart
-                  </button>
-                  <button class="btn btn-primary px-2">
+                  <button
+                  class="btn btn-primary px-2"
+                  onclick="try { addItemToCart({ storeId: ${
+                    store.id
+                  }, productId: ${product.product_id}, customerId: ${
+      customerData?.customer_id || "null"
+    }, action: 'addToCart' }) } catch(e) { console.error(e); }"
+                >
+                  <i class="bi bi-cart3 pe-2"></i>Add to Cart
+                </button>
+                  <button class="btn btn-primary px-2" onclick="try { addItemToCart({ storeId: ${
+                    store.id
+                  }, productId: ${product.product_id}, customerId: ${
+      customerData?.customer_id || "null"
+    }, action: 'buyNow' }) } catch(e) { console.error(e); }">
                     <i class="bi bi-bag pe-1"></i> Buy Now
                   </button>
                 </div>

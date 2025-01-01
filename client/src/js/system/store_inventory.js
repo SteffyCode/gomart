@@ -78,15 +78,15 @@ async function getDatas(url = "") {
         rows[0].inventory.quantity < rows[0].inventory.reorder_level &&
         !rows[0].inventory.is_reordered
       ) {
-        const formData = {
-          quantity: 10,
+        const reorderData = {
+          quantity: rows[0].inventory.auto_order_quantity,
           store_id: profileData.id,
           vendor_id: rows[0].productData.vendor_id,
           product_id: rows[0].inventory.product_id,
-          order_type: "Wholesale",
+          order_type: rows[0].inventory.order_type,
         };
 
-        console.log(formData);
+        console.log(reorderData);
         fetch(backendURL + "/api/reorder-request", {
           method: "POST",
           headers: {
@@ -94,7 +94,7 @@ async function getDatas(url = "") {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(reorderData),
         });
 
         fetch(
@@ -293,106 +293,162 @@ function getInventoryDataHTML(inventory, product, vendor, index) {
 }
 
 function getUpdateModal(inventory, product) {
-  return `    
+  return `
   <!-- Modal -->
-    <div
-      class="modal fade"
-      id="updateProduct${inventory.inventory_id}"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header bg-primary">
-            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
-              Product Name - ${product.product_name}
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              id="closeButton${inventory.inventory_id}"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <form id="update_inventory${inventory.inventory_id}">
-
-            <div class="modal-body">
-              <div class="row">
-                
-              <div class="row">
-                <div class="col-md-12">
-                  <label for="productPrice" class="fw-bold">Price</label>
-                  <input
-                    type="number"
-                    id="productPrice"
-                    name="new_price"
-                    class="form-control"
-                    step="0.01"
-                    min="0"
-                    value="${inventory.new_price}"
-                    required
-                  />
-                </div>
-                <div class="col-md-12 mt-3">
-                  <label for="productQuantity" class="fw-bold">Quantity</label>
-                  <input
-                    type="number"
-                    id="productQuantity"
-                    name="quantity"
-                    min="1"
-                    class="form-control"
-                    value="${inventory.quantity}"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 mt-3">
-                  <label for="reorderLevel" class="fw-bold"
-                    >Reorder Level</label
-                  >
-                  <input
-                    type="number"
-                    id="reorderLevel"
-                    name="reorder_level"
-                    min="0"
-                    class="form-control"
-                    value="${inventory.reorder_level}"
-                    required
-                  />
-                </div>
-                <div class="col-md-12 mt-3">
-                  <label for="reorderAlertQuantity" class="fw-bold"
-                    >Reorder Alert Quantity</label
-                  >
-                  <input
-                    type="number"
-                    id="reorderAlertQuantity"
-                    name="reorder_quantity"
-                    min="0"
-                    class="form-control"
-                    value=  "${inventory.reorder_quantity}"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="submit" class="btn btn-primary updateButton" id="upButton${inventory.inventory_id}" data-id="${inventory.inventory_id}">Update</button>
-            </div>
-          </form>
+  <div
+    class="modal fade"
+    id="updateProduct${inventory.inventory_id}"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
+            Product Name - ${product.product_name}
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            id="closeButton${inventory.inventory_id}"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
+        <form id="update_inventory${inventory.inventory_id}">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <label for="productPrice${
+                  inventory.inventory_id
+                }" class="fw-bold">Price</label>
+                <input
+                  type="number"
+                  id="productPrice${inventory.inventory_id}"
+                  name="new_price"
+                  class="form-control"
+                  step="0.01"
+                  min="0"
+                  value="${inventory.new_price}"
+                  required
+                />
+              </div>
+              <div class="col-md-12 mt-3">
+                <label for="productQuantity${
+                  inventory.inventory_id
+                }" class="fw-bold">Quantity</label>
+                <input
+                  type="number"
+                  id="productQuantity${inventory.inventory_id}"
+                  name="quantity"
+                  min="1"
+                  class="form-control"
+                  value="${inventory.quantity}"
+                  required
+                />
+              </div>
+            </div>
+            <!-- Reorder Conditions -->
+            <br />
+            <strong class="fs-6 text-primary">Reorder Condition</strong>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="reorderLevel${
+                  inventory.inventory_id
+                }" class="fw-bold">Reorder Level</label>
+                <input
+                  type="number"
+                  id="reorderLevel${inventory.inventory_id}"
+                  name="reorder_level"
+                  min="1"
+                  class="form-control"
+                  value="${inventory.reorder_level || ""}"
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title="Minimum stock level before reordering is triggered"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="reorderAlertQuantity${
+                  inventory.inventory_id
+                }" class="fw-bold">Reorder Alert Quantity</label>
+                <input
+                  type="number"
+                  id="reorderAlertQuantity${inventory.inventory_id}"
+                  name="reorder_quantity"
+                  min="0"
+                  class="form-control"
+                  value="${inventory.reorder_quantity || ""}"
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title="Threshold to send alerts for low stock levels"
+                />
+              </div>
+            </div>
+
+            <!-- Automatic Reorder Details -->
+            <br />
+            <strong class="fs-6 text-primary">Automatic Reorder Details</strong>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="autoReorderQty${
+                  inventory.inventory_id
+                }" class="fw-bold">Auto Reorder Quantity</label>
+                <input
+                  type="number"
+                  id="autoReorderQty${inventory.inventory_id}"
+                  name="auto_order_quantity"
+                  min="1"
+                  class="form-control"
+                  value="${inventory.auto_order_quantity || ""}"
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title="Quantity to be reordered automatically"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="reorderType${
+                  inventory.inventory_id
+                }" class="fw-bold">Reorder Type</label>
+                <select
+                  id="reorderType${inventory.inventory_id}"
+                  name="order_type"
+                  class="form-select"
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title="Specify the reorder type"
+                >
+                  <option value="" disabled ${
+                    !inventory.order_type ? "selected" : ""
+                  }>Select Type</option>
+                  <option value="Bulk" ${
+                    inventory.order_type === "Bulk" ? "selected" : ""
+                  }>Bulk</option>
+                  <option value="Per Item" ${
+                    inventory.order_type === "Per Item" ? "selected" : ""
+                  }>Per Item</option>
+                  <option value="Wholesale" ${
+                    inventory.order_type === "Wholesale" ? "selected" : ""
+                  }>Wholesale</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary updateButton" id="upButton${
+              inventory.inventory_id
+            }" data-id="${inventory.inventory_id}">Update</button>
+          </div>
+        </form>
       </div>
-    </div>`;
+    </div>
+  </div>`;
 }
 
 const pageAction = async (e) => {

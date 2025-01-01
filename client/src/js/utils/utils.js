@@ -36,7 +36,7 @@ async function redirectBasedOnType() {
 }
 
 async function userlogged() {
-  try {
+  if (localStorage.getItem("token") != null) {
     const profileResponse = await fetch(`${backendURL}/api/profile/show`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -45,10 +45,7 @@ async function userlogged() {
 
     if (!profileResponse.ok) {
       console.error("Failed to fetch user data");
-      document.getElementById("loggedUser").innerHTML = `<!-- Login Button -->
-        <a href="login.html" class="btn btn-primary text-white px-3">
-          Login
-        </a>`;
+      document.getElementById("loggedUser").innerHTML = renderLoginButton();
       return;
     }
 
@@ -63,78 +60,117 @@ async function userlogged() {
     const userloggedIn = document.getElementById("loggedUser");
     if (!userloggedIn) return;
 
-    // Render user details based on role
+    // Render user details based on their role
     if (profileData.role === "Customer") {
       userloggedIn.innerHTML = `
-        <div id="loggedUser">
-          <img
-            class="rounded-circle border mx-2"
-            src="${
-              profileData.image_path
-                ? `${backendURL}/storage/${profileData.image_path}`
-                : `src/img/avatar.png`
-            }"
-            alt="Profile"
-            width="30"
-            height="30"
-          />
-          <button class="btn btn-primary" id="logout_button">Logout</button>
-        </div>
+          <div id="loggedUser">
+            <img
+              class="rounded-circle border mx-2"
+              src="${
+                profileData.image_path
+                  ? `${backendURL}/storage/${profileData.image_path}`
+                  : "src/img/avatar.png"
+              }"
+              alt="Profile"
+              width="30"
+              height="30"
+            />
+            <button class="btn btn-primary" id="logout_button">Logout</button>
+          </div>
         `;
-      logoutbutton(); // Ensure the logout button logic is in place
-    } else if (
-      profileData.business_type === "Vendor" ||
-      profileData.business_type === "Retail"
-    ) {
+      logoutbutton(); // Ensure this function handles logout properly
+    } else if (["Vendor", "Retail"].includes(profileData.business_type)) {
       userloggedIn.innerHTML = `
-        <div id="loggedUser">
-          Welcome, ${profileData.business_name}!
-          <img
-            class="rounded-circle border ms-2"
-            src="${
-              profileData.image_path
-                ? `${backendURL}/storage/${profileData.image_path}`
-                : `src/img/avatar.png`
-            }"
-            alt="Profile"
-            width="30"
-            height="30"
-          />
-        </div>`;
+          <div id="loggedUser">
+            Welcome, ${profileData.business_name}!
+            <img
+              class="rounded-circle border ms-2"
+              src="${
+                profileData.image_path
+                  ? `${backendURL}/storage/${profileData.image_path}`
+                  : "src/img/avatar.png"
+              }"
+              alt="Profile"
+              width="30"
+              height="30"
+            />
+          </div>
+        `;
     } else {
-      userloggedIn.innerHTML = `<!-- Login Button -->
-        <a href="login.html" class="btn btn-primary text-white px-3">
-          Login
-        </a>`;
+      userloggedIn.innerHTML = renderLoginButton();
     }
-  } catch (error) {
-    console.error("Error:", error.message);
-    document.getElementById("loggedUser").innerHTML = `<!-- Login Button -->
-      <a href="login.html" class="btn btn-primary text-white px-3">
-        Login
-      </a>`;
+  } else {
+    // No token found, show login button
+    document.getElementById("loggedUser").innerHTML = renderLoginButton();
   }
+}
+
+// Reusable function for login button
+function renderLoginButton() {
+  return `
+    <a href="login.html" class="btn btn-primary text-white px-3">
+      Login
+    </a>
+  `;
 }
 
 userlogged();
 
 async function logoutbutton() {
-  const logout_button = document.getElementById("logout_button");
-  logout_button.addEventListener("click", async () => {
-    logout_button.disabled = true;
+  if (localStorage.getItem("token") != null) {
+    const logout_button = document.getElementById("logout_button");
+    logout_button.addEventListener("click", async () => {
+      logout_button.disabled = true;
 
-    const logout = await fetch(backendURL + "/api/logout", { headers });
+      const logout = await fetch(backendURL + "/api/logout", { headers });
 
-    if (!logout.ok) {
-      throw new Error("Failed to logout");
-    }
+      if (!logout.ok) {
+        throw new Error("Failed to logout");
+      }
 
-    if (logout.ok) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("type");
-      window.location.pathname = "/client/login.html";
-    }
-  });
+      if (logout.ok) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("type");
+        window.location.pathname = "/client/login.html";
+      }
+    });
+  }
 }
 
-export { backendURL, redirectBasedOnType, headers, userlogged, logoutbutton };
+async function cartLength() {
+  const cartRes = await fetch(backendURL + "/api/carts/by-store", {
+    headers,
+  });
+
+  if (!cartRes.ok) {
+    throw new Error("Failed to get cart length");
+  }
+
+  const cartData = await cartRes.json();
+
+  let count = 0;
+  for (let i = 0; i < cartData.length; i++) {
+    for (let j = 0; j < cartData[i].items.length; j++) {
+      count += cartData[i].items[j].quantity;
+    }
+  }
+
+  document.getElementById("cart_length").innerHTML = count;
+}
+
+// Conditionally call the function if the user is logged in
+if (
+  localStorage.getItem("token") != null &&
+  localStorage.getItem("type") == "Customer"
+) {
+  cartLength();
+}
+
+export {
+  cartLength,
+  backendURL,
+  redirectBasedOnType,
+  headers,
+  userlogged,
+  logoutbutton,
+};

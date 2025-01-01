@@ -26,6 +26,9 @@ async function getDatas(url = "", keyword) {
   const products = await fetch(backendURL + "/api/product/all", {
     headers,
   });
+  const carts = await fetch(backendURL + "/api/carts/storeIndex", {
+    headers,
+  });
 
   if (!orders.ok) {
     throw new Error("Can't fetch order data");
@@ -36,27 +39,53 @@ async function getDatas(url = "", keyword) {
   if (!products.ok) {
     throw new Error("Can't fetch product data");
   }
+  if (!carts.ok) {
+    throw new Error("Can't fetch cart data");
+  }
 
   const orderDatas = await orders.json();
   const customerDatas = await customers.json();
   const productDatas = await products.json();
+  const cartDatas = await carts.json();
+
+  console.log(cartDatas[0].items);
 
   if (orders.ok) {
-    let hasOrder = false,
-      orderHTML = "",
-      i = 0;
-    console.log(orderDatas.data);
-    orderDatas.data.forEach((order) => {
+    let hasOrder = false;
+    let orderHTML = "";
+    let i = 0;
+
+    orderDatas.data.forEach((order, index) => {
       const customer = customerDatas.find(
         (c) => c.customer_id === order.customer_id
       );
-      const product = productDatas.find(
-        (p) => p.product_id === order.product_id
-      );
+
+      let orderedItems = "";
+
+      const currentCart = cartDatas[index]; // Get the cart for this index
+      if (currentCart && Array.isArray(currentCart.items)) {
+        currentCart.items.forEach((c) => {
+          const product = productDatas.find(
+            (p) => p.product_id === c.product_id
+          );
+
+          if (product) {
+            orderedItems += `${product.product_name} (price (per):${c.price}) (qty:${c.quantity})<br>`;
+          } else {
+            console.warn(`Product not found for cart item:`, c);
+          }
+        });
+      } else {
+        console.warn(
+          `Cart data missing or invalid for index: ${index}`,
+          currentCart
+        );
+      }
+
       hasOrder = true;
       i++;
 
-      orderHTML += getOrderHTML(order, customer, product, i);
+      orderHTML += getOrderHTML(order, customer, i, orderedItems);
     });
 
     getOrders.innerHTML = orderHTML;
@@ -71,21 +100,21 @@ async function getDatas(url = "", keyword) {
     if (orderDatas.links) {
       orderDatas.links.forEach((link) => {
         pagination += `
-                    <li class="page-item" >
-                        <a class="page-link ${
-                          link.url == null ? " disabled" : ""
-                        }${link.active ? " active" : ""}" href="#" data-url="${
+                  <li class="page-item">
+                      <a class="page-link ${
+                        link.url == null ? " disabled" : ""
+                      }${link.active ? " active" : ""}" href="#" data-url="${
           link.url
         }">
-                            ${
-                              link.label === "&laquo; Previous"
-                                ? `&#171;`
-                                : link.label === "Next &raquo;"
-                                ? `&#187;`
-                                : link.label
-                            }
-                        </a>
-                    </li>`;
+                          ${
+                            link.label === "&laquo; Previous"
+                              ? `&#171;`
+                              : link.label === "Next &raquo;"
+                              ? `&#187;`
+                              : link.label
+                          }
+                      </a>
+                  </li>`;
       });
     }
 
@@ -100,28 +129,15 @@ async function getDatas(url = "", keyword) {
     });
   }
 }
+// }
 
-function getOrderHTML(order, customer, product, index) {
+function getOrderHTML(order, customer, index, orderedItems) {
   return `<tr>
                     <td class="fw-bold">${index}</td>
-                    <td>${product.product_name}</td>
-                    <td>${
-                      customer.is_frequent_shopper
-                        ? `${customer.first_name} ${customer.last_name}`
-                        : `Anonymous`
-                    }</td>
-                    <td>${
-                      customer.is_frequent_shopper
-                        ? customer.address
-                        : `Anonymous`
-                    }</td>
-                    <td>${
-                      customer.is_frequent_shopper
-                        ? customer.phone_number
-                        : `Anonymous`
-                    }</td>
-                    <td>${order.quantity}</td>
-                    <td>${order.price}</td>
+                    <td>${orderedItems}</td>
+                    <td>${customer.first_name} ${customer.last_name}</td>
+                    <td>${customer.address}</td>
+                    <td>${customer.phone_number}</td>
                     <td>${order.shipping_cost}</td>
                     <td>${order.total_amount}</td>
                     <td>${order.payment_method}</td>
@@ -174,6 +190,7 @@ function getOrderHTML(order, customer, product, index) {
                            ? ` <button
                           class="btn btn-sm btn-outline-success updateStatusButton"
                           data-id="${order.order_id}"
+                          data-cart-id="${order.cart_id}"
                           data-status="Delivered"
                         >
                           Mark as Delivered
@@ -215,11 +232,12 @@ const pageAction = async (e) => {
 function updateClickStatus(e) {
   const id = e.target.getAttribute("data-id");
   const status = e.target.getAttribute("data-status");
-  console.log(id, status);
-  updateRequestStatus(id, status);
+  const cart_id = e.target.getAttribute("data-cart-id");
+  console.log(id, status, cart_id);
+  updateRequestStatus(id, status, cart_id);
 }
 
-async function updateRequestStatus(id, status) {
+async function updateRequestStatus(id, status, cart_id) {
   if (confirm(`Are you sure you want to this?`)) {
     const formData = new FormData();
     formData.append("status", status);
@@ -228,6 +246,7 @@ async function updateRequestStatus(id, status) {
     if (status === "Shipped") {
       formData.append("shipped_date", currentDate);
     } else if (status === "Delivered") {
+      storeDeliveredSale(cart_id);
       formData.append("delivered_date", currentDate);
     }
 
@@ -247,6 +266,57 @@ async function updateRequestStatus(id, status) {
     if (reorderResponse.ok) {
       await getDatas();
     }
+  }
+}
+
+async function storeDeliveredSale(cartId) {
+  const cartResponse = await fetch(`${backendURL}/api/carts/show/${cartId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  if (!cartResponse.ok) {
+    const errorDetails = await cartResponse.text();
+    throw new Error(`Failed to fetch cart data: ${errorDetails}`);
+  }
+
+  const cartData = await cartResponse.json();
+
+  // console.log("Fetched Cart Data:", cartData);
+  console.log("Fetched Cart Items:", cartData.items);
+
+  const items = cartData.items;
+
+  for (const item of items) {
+    const saleData = {
+      customer_id: cartData.customer_id,
+      store_id: cartData.store_id,
+      price: Number(item.price),
+      product_id: item.product_id,
+      quantity: Number(item.quantity),
+      total_amount: Number(item.price) * Number(item.quantity),
+    };
+
+    console.log("Sending Sale Data:", saleData);
+
+    const saleResponse = await fetch(`${backendURL}/api/sales`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(saleData),
+    });
+
+    if (!saleResponse.ok) {
+      const errorDetails = await saleResponse.text();
+      throw new Error(`Failed to create sale data: ${errorDetails}`);
+    }
+
+    console.log("Sale data created successfully for product:", item.product_id);
   }
 }
 

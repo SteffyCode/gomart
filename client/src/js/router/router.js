@@ -41,8 +41,8 @@ function setRouter() {
       }
       break;
 
-    case `/client/checkout.html`:
-    case `/client/order_confirmation.html`:
+    case `/client/buyer_checkout.html`:
+    case `/client/buyer_cart.html`:
       if (token === null) {
         window.location.pathname = `/client/login.html`;
       }
