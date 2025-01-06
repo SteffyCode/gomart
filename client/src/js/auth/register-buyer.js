@@ -24,7 +24,7 @@ getCustomerForm.onsubmit = async (e) => {
 
   // Disable the register button and show loading spinner
   registerButton.disabled = true;
-  registerButton.innerHTML = `<div class="spinner-border" role="status" width="30px">
+  registerButton.innerHTML = `<div class="spinner-border" role="status" width="20px">
                                                                 </div><span class="ms-2">loading...</span>`;
 
   // Send a POST request to the backend API to register the customer (fetch API user register endpoint)

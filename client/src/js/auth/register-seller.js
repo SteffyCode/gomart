@@ -14,7 +14,7 @@ getSellerForm.onsubmit = async (e) => {
   const registerButton = document.querySelector("#sellerForm button");
 
   registerButton.disabled = true;
-  registerButton.innerHTML = `<div class="spinner-border" role="status" width="30px">
+  registerButton.innerHTML = `<div class="spinner-border" role="status" width="20px">
                                                                 </div><span class="ms-2">loading...</span>`;
 
   const registerResponse = await fetch(backendURL + "/api/user", {
