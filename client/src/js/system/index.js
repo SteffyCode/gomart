@@ -25,6 +25,10 @@ async function getDatas(keyword) {
   // Parse the store data into JSON
   const store = await storeRes.json();
 
+  // //filtering
+  // const filteredStore = store.filter((s) => s.business_type === "Retail");
+  // console.log(filteredStore.length);
+
   // Randomize the store order
   const randomStores = store.sort(() => Math.random() - 0.5);
 

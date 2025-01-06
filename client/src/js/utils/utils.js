@@ -51,6 +51,8 @@ async function userlogged() {
 
     const profileData = await profileResponse.json();
 
+    console.log("mao ning profile data: ", profileData);
+
     // Set business_id if applicable
     if (["Retail", "Vendor"].includes(profileData.business_type)) {
       document.getElementById("business_id").value = profileData.id;
@@ -64,6 +66,7 @@ async function userlogged() {
     if (profileData.role === "Customer") {
       userloggedIn.innerHTML = `
           <div id="loggedUser">
+          ${profileData.first_name} ${profileData.last_name}
             <img
               class="rounded-circle border mx-2"
               src="${
@@ -129,7 +132,7 @@ async function logoutbutton() {
       if (logout.ok) {
         localStorage.removeItem("token");
         localStorage.removeItem("type");
-        window.location.pathname = "/client/login.html";
+        window.location.pathname = "/client/index.html";
       }
     });
   }

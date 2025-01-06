@@ -76,6 +76,7 @@
     <!-- Main Content -->
     <main class="content" id="productDetails"></main>
     <script>
+      //Add to cart function
       async function addItemToCart({ storeId, productId, customerId, action }) {
         try {
           const quantityInput = document.getElementById("quantity");
@@ -96,7 +97,7 @@
           console.log(data);
 
           const response = await fetch(
-            "http://ite19-backend.test/api/carts/add",
+            "http://localhost/ite19-backend/public/api/carts/add",
             {
               method: "POST",
               headers: {
@@ -131,10 +132,11 @@
         }
       }
 
+      // function returns the total count of items currently in the shopping cart for a specific customer
       async function cartLength() {
         try {
           const cartRes = await fetch(
-            "http://ite19-backend.test/api/carts/by-store",
+            "http://localhost/ite19-backend/public/api/carts/by-store",
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

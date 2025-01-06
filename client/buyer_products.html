@@ -124,7 +124,9 @@
         </div>
       </div>
     </main>
+
     <script>
+      //ADD ITEM TO CART FUNCTION
       async function addItemToCart({
         storeId,
         productId,
@@ -142,7 +144,7 @@
 
         try {
           const response = await fetch(
-            "http://ite19-backend.test/api/carts/add",
+            "http://localhost/ite19-backend/public/api/carts/add",
             {
               method: "POST",
               headers: {
@@ -174,10 +176,11 @@
         }
       }
 
+      //it determines how many cart items to specific customer FUNCTION
       async function cartLength() {
         try {
           const cartRes = await fetch(
-            "http://ite19-backend.test/api/carts/by-store",
+            "http://localhost/ite19-backend/public/api/carts/by-store",
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
