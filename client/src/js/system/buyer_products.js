@@ -2,18 +2,23 @@ import { backendURL, userlogged, headers } from "../utils/utils.js";
 
 userlogged();
 
-async function getDatas() {
+async function getDatas(keyword) {
   const listOfProducts = document.getElementById("listOfProducts");
   const sectionNamelist = document.getElementById("sectionNamelist");
   const productLength = document.getElementById("productLength");
 
   let customerData = null;
 
+  let queryParams =
+    "?" +
+    // (url ? new URL(url).searchParams + "&" : "") +
+    (keyword ? "keyword=" + encodeURIComponent(keyword) : "");
+
   try {
     const [productsRes, storesRes, inventoryRes] = await Promise.all([
       fetch(backendURL + "/api/product/all", { headers }),
       fetch(backendURL + "/api/user", { headers }),
-      fetch(backendURL + "/api/inventory/all", { headers }),
+      fetch(backendURL + "/api/inventory/all" + queryParams, { headers }),
     ]);
 
     if (localStorage.getItem("token") !== null) {
@@ -32,6 +37,8 @@ async function getDatas() {
     const productData = await productsRes.json();
     const storeData = await storesRes.json();
     const inventoryData = await inventoryRes.json();
+
+    console.log(inventoryData);
 
     let sectionHTML = "";
     const seenSections = new Set();
@@ -95,8 +102,7 @@ function filterProducts(productData, storeData, inventoryData, customerData) {
   });
 
   productLength.textContent = count;
-  listOfProducts.innerHTML =
-    count > 0 ? productHTML : "No products found in the selected section.";
+  listOfProducts.innerHTML = count > 0 ? productHTML : "No products found.";
 }
 
 function getProductHTML(product, store, inventory, customerData) {
@@ -131,5 +137,15 @@ function getProductHTML(product, store, inventory, customerData) {
             </div>
       </div>`;
 }
+
+const search_form = document.getElementById("search_form");
+search_form.onsubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(search_form);
+  const keyword = formData.get("keyword");
+  console.log(keyword);
+  getDatas(keyword);
+};
 
 getDatas();

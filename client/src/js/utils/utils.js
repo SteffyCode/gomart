@@ -2,7 +2,7 @@ import { setRouter } from "../router/router.js";
 
 setRouter();
 
-const backendURL = "http://ite19-backend.test";
+const backendURL = "http://ite19-backend/public";
 
 const headers = {
   Authorization: `Bearer ${localStorage.getItem("token")}`,

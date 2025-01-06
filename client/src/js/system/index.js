@@ -5,12 +5,19 @@ import { backendURL, headers, userlogged } from "../utils/utils.js";
 userlogged();
 
 // Fetch and display store data
-async function getDatas() {
+async function getDatas(keyword) {
   // Get the HTML element where the stores will be displayed
   const getStores = document.getElementById("getStores");
 
+  let queryParams =
+    "?" +
+    // (url ? new URL(url).searchParams + "&" : "") + // pag walay pagination
+    (keyword ? "keyword=" + encodeURIComponent(keyword) : "");
+
   // Fetch store data from the backend API
-  const storeRes = await fetch(backendURL + `/api/user`, { headers });
+  const storeRes = await fetch(backendURL + `/api/user` + queryParams, {
+    headers,
+  });
   if (!storeRes.ok) {
     throw new Error("Failed to fetch data"); // Handle fetch failure
   }
@@ -72,6 +79,16 @@ function getStoreHTML(store) {
       </div>
     </div>`;
 }
+
+const search_form = document.getElementById("search_form");
+search_form.onsubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(search_form);
+  const keyword = formData.get("keyword");
+  console.log(keyword);
+  getDatas(keyword);
+};
 
 // Call the function to fetch and display the store data
 getDatas();

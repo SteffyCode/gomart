@@ -7,12 +7,17 @@ import {
 
 logoutbutton();
 
-async function getDatas(url = "") {
+async function getDatas(url = "", keyword) {
   const getcategoryTabsContent = document.getElementById("categoryTabsContent");
   const getInventoryTab = document.getElementById("getInventoryTab");
 
+  let queryParams =
+    "?" +
+    (url ? new URL(url).searchParams + "&" : "") +
+    (keyword ? "keyword=" + encodeURIComponent(keyword) : "");
+
   const inventoryResponse = await fetch(
-    url || backendURL + "/api/store/inventory",
+    url || backendURL + "/api/store/inventory" + queryParams,
     {
       headers,
     }
@@ -450,6 +455,16 @@ function getUpdateModal(inventory, product) {
     </div>
   </div>`;
 }
+
+const search_form = document.getElementById("search_form");
+search_form.onsubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(search_form);
+  const keyword = formData.get("keyword");
+  console.log(keyword);
+  getDatas("", keyword);
+};
 
 const pageAction = async (e) => {
   e.preventDefault();
