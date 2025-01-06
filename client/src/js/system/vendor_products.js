@@ -76,14 +76,17 @@ async function getDatas(url = "", keyword, filterProduct = "All") {
     });
   }
 
+  // assign click event on update button
   document.querySelectorAll(".updateButton").forEach((button) => {
     button.addEventListener("click", updateClickInfo);
   });
 
+  // assign click event on delete button
   document.querySelectorAll(".deleteButton").forEach((button) => {
     button.addEventListener("click", deleteClick);
   });
 
+  // pagination
   document.getElementById("pages").innerHTML = pagination;
 
   document.querySelectorAll("#pages .page-link").forEach((link) => {
@@ -379,6 +382,7 @@ function deleteClick(e) {
   deleteInfo(id);
 }
 
+// update functionality
 async function updateInfo(id) {
   const update_form = document.getElementById("update_product_form" + id);
 
@@ -445,6 +449,7 @@ async function updateInfo(id) {
   };
 }
 
+//delete functionality
 async function deleteInfo(id) {
   if (confirm("Are you sure you want to delete this event item?")) {
     const productResponse = await fetch(backendURL + "/api/product/" + id, {
