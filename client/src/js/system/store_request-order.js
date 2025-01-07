@@ -327,10 +327,12 @@ async function updateInfo(id) {
 
     const formData = new FormData(update_form);
 
+    // new inputted data
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
 
+    // mwthod spoofing
     formData.append("_method", "PUT");
 
     const requestResponse = await fetch(

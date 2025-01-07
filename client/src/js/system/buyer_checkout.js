@@ -6,7 +6,7 @@ import {
 } from "../utils/utils.js";
 
 userlogged();
-logoutbutton();
+// logoutbutton();
 
 async function checkoutItems() {
   const checkout = document.getElementById("checkout");
@@ -137,8 +137,75 @@ function getCheckoutDetails(cartItemHTML, total, customer, cart) {
   }" store-id="${cart.store_id}" customer-address="${
     customer.address
   }" shipped-cost="${29}">Confirm Order</button>
-    </div>`;
+    </div>
+    
+    `;
 }
+
+// function editAddressModal(customer) {
+//   return ` <!-- Edit Address Modal -->
+//     <div
+//       class="modal fade"
+//       id="editAddressModal"
+//       tabindex="-1"
+//       aria-labelledby="editAddressModalLabel"
+//       aria-hidden="true"
+//     >
+//       <div class="modal-dialog">
+//         <div class="modal-content">
+//           <div class="modal-header">
+//             <h5 class="modal-title" id="editAddressModalLabel">
+//               Edit Delivery Details
+//             </h5>
+//             <button
+//               type="button"
+//               class="btn-close"
+//               data-bs-dismiss="modal"
+//               aria-label="Close"
+//             ></button>
+//           </div>
+//           <form id="addressForm">
+//             <div class="modal-body">
+//               <input type="hidden" id="customer_id" name="customerId" />
+//               <div class="mb-3">
+//                 <label for="phone" class="form-label">Phone Number</label>
+//                 <input
+//                   type="text"
+//                   class="form-control"
+//                   id="phone_number"
+//                   name="phone_number"
+//                   required
+//                   value="${customer.phone_number}"
+//                 />
+//               </div>
+//               <div class="mb-3">
+//                 <label for="address" class="form-label">Address</label>
+//                 <textarea
+//                   class="form-control"
+//                   id="address"
+//                   name="address"
+//                   rows="3"
+//                   required
+//                 >${customer.address}</textarea>
+//               </div>
+//             </div>
+//             <div class="modal-footer">
+//               <button
+//                 type="button"
+//                 class="btn btn-secondary"
+//                 data-bs-dismiss="modal"
+//               >
+//                 Close
+//               </button>
+//               <button type="submit" class="btn btn-primary text-white">
+//                 Save changes
+//               </button>
+//             </div>
+//           </form>
+//         </div>
+//       </div>
+//     </div>`;
+// }
 
 function orderButtonClick(e) {
   const data = {

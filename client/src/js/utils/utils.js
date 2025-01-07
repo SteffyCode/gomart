@@ -65,22 +65,35 @@ async function userlogged() {
     // Render user details based on their role
     if (profileData.role === "Customer") {
       userloggedIn.innerHTML = `
-          <div id="loggedUser">
-          ${profileData.first_name} ${profileData.last_name}
-            <img
-              class="rounded-circle border mx-2"
-              src="${
-                profileData.image_path
-                  ? `${backendURL}/storage/${profileData.image_path}`
-                  : "src/img/avatar.png"
-              }"
-              alt="Profile"
-              width="30"
-              height="30"
-            />
-            <button class="btn btn-primary" id="logout_button">Logout</button>
-          </div>
+           <div id="loggedUser" class="dropdown">
+      <div class="d-flex align-items-center dropdown-toggle" 
+      id="dropdownMenuButton" data-bs-toggle="dropdown" 
+      aria-expanded="false"
+       style="cursor: pointer;">
+        ${profileData.first_name} ${profileData.last_name}
+        <img
+          class="rounded-circle border mx-2"
+          src="${
+            profileData.image_path
+              ? `${backendURL}/storage/${profileData.image_path}`
+              : "src/img/avatar.png"
+          }"
+          alt="Profile"
+          width="30"
+          height="30"
+        />
+      </div>
+      <ul class="dropdown-menu profile" aria-labelledby="dropdownMenuButton">
+        <li>
+          <a class="dropdown-item" href="buyer_profile.html">Profile</a>
+        </li>
+        <li>
+          <button class="dropdown-item" id="logout_button">Logout</button>
+        </li>
+      </ul>
+     </div>
         `;
+
       logoutbutton(); // Ensure this function handles logout properly
     } else if (["Vendor", "Retail"].includes(profileData.business_type)) {
       userloggedIn.innerHTML = `

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoMart</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="src/js/system/buyer_profile.js"></script>
+    <style>
+      .custom-box-shadow {
+        box-shadow: 0 1px 8px 1px rgba(20, 113, 243, 0.5) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar shadow-sm bg-white fixed-top custom-box-shadow">
+      <div class="container">
+        <div class="d-flex align-items-center w-100">
+          <!-- Left side: Logo -->
+          <div class="d-flex align-items-center">
+            <!-- Logo -->
+            <a class="navbar-brand ms-3" href="index.html">
+              <img
+                src="src/img/logo.png"
+                alt="GoMart Logo"
+                width="100"
+                height="auto"
+              />
+            </a>
+          </div>
+
+          <!-- Right side: Nav item, Search, Cart, Profile -->
+          <div class="d-flex align-items-center ms-auto">
+            <!-- Nav items -->
+            <div class="nav-item mx-3">
+              <a class="nav-link active" href="index.html">Home</a>
+            </div>
+            <div class="nav-item mx-3">
+              <a class="nav-link" href="buyer_products.html">All Products</a>
+            </div>
+
+            <!-- Search Form -->
+            <form class="d-none d-md-flex" id="search_form" role="search">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  name="keyword"
+                />
+                <button class="btn btn-outline-primary" type="submit">
+                  Search
+                </button>
+              </div>
+            </form>
+
+            <!-- Cart Icon -->
+            <a href="buyer_cart.html" class="position-relative ms-3 me-1">
+              <img
+                src="src/icon/grocery-store.png"
+                alt="cart"
+                width="20"
+                height="20"
+              />
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                id="cart_length"
+                >0
+              </span>
+            </a>
+
+            <span class="mx-3" id="loggedUser"></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content">
+      <div class="container mt-3">
+        <h4 class="fw-bold">Profile</h4>
+
+        <div class="row">
+          <!-- Left Section: Profile Image and Details -->
+          <div class="col-md-8 d-flex align-items-start">
+            <img
+              src="src/img/avatar.png"
+              alt="Profile Image"
+              class="border p-2"
+              style="width: 90px; height: 90px"
+            />
+            <div class="ms-3">
+              <div class="d-flex align-items-center">
+                <h5 class="mb-0 me-2">NAME(first_name & last_name)</h5>
+                <select
+                  class="form-select form-select-sm w-auto"
+                  id="frequentShopperSelect"
+                  aria-label="Frequent Shopper"
+                >
+                  <option value="" disabled selected>Frequent Shopper</option>
+                  <option value="true">Frequent Shopper: Enable</option>
+                  <option value="false">Frequent Shopper: Disable</option>
+                </select>
+              </div>
+              <p class="text-muted mb-0">email</p>
+            </div>
+          </div>
+          <!-- Right Section: Edit Button -->
+          <div class="col-md-4 text-end">
+            <button
+              class="btn btn-primary text-white px-3"
+              data-bs-toggle="modal"
+              data-bs-target="#editModal"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <p class="mb-1"><strong>Phone:</strong> phone_number</p>
+            <p class="mt-0"><strong>Address:</strong> address</p>
+          </div>
+        </div>
+
+        <hr class="mt-2" />
+        <!-- purchases section -->
+        <h4 class="fw-bold">My Purchases</h4>
+        <!-- Card for Purchase Details -->
+
+        <div class="card mt-3">
+          <div class="card-body">
+            <!-- Header Section: Store Name and Status -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="card-title mb-0">
+                Store Name: <strong>ABC Store</strong>
+              </h5>
+              <span class="badge bg-warning text-dark">Status: Shipped</span>
+            </div>
+
+            <!-- Table for Purchased Items -->
+            <table class="table table-borderless">
+              <thead class="border-bottom">
+                <tr>
+                  <th>Item Name</th>
+                  <th>Unit Price</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Item 1</td>
+                  <td>₱100.00</td>
+                  <td>2</td>
+                  <td>₱200.00</td>
+                </tr>
+                <tr>
+                  <td>Item 2</td>
+                  <td>₱50.00</td>
+                  <td>3</td>
+                  <td>₱150.00</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Footer Section: Total Price -->
+            <div class="d-flex justify-content-end mt-1 mb-0">
+              <h6 class="fw-bold">Grand Total: ₱350.00</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="editModal"
+          tabindex="-1"
+          aria-labelledby="editModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-md">
+            <div class="modal-caontent">
+              <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editModalLabel">
+                  Edit Information
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div class="modal-body">
+                <form id="editForm">
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="firstName" class="form-label"
+                        >First Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="firstName"
+                        name="first_name"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="lastName" class="form-label">Last Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        name="last_name"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" />
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label">Phone</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phoneNumber"
+                        name="phone_number"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="address" class="form-label">Address</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="address"
+                        name="address"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="image" class="form-label">Profile Image</label>
+                    <input type="file" class="form-control" id="image" />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary updateButton"
+                  id="saveButton"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of edit modal -->
+      </div>
+    </main>
+  </body>
+</html>
