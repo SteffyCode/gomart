@@ -43,7 +43,13 @@ createProductForm.onsubmit = async (e) => {
       return;
     }
   }
+  const profileRes = await fetch(backendURL + "/api/profile/show", { headers });
+  if (!profileRes.ok) throw new Error(profileRes.status);
+  const profileData = await profileRes.json();
 
+  // append vendor_id
+  formData.append("vendor_id", profileData.id);
+  // append UPC
   formData.append("UPC", generateUPC());
 
   const response = await fetch(backendURL + "/api/product", {

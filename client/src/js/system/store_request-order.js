@@ -215,13 +215,21 @@ async function createRequest() {
   const vendorList = await fetch(backendURL + "/api/user", {
     headers,
   });
+  const profileRes = await fetch(backendURL + "/api/profile/show", { headers });
 
   if (!productList.ok) {
     throw new Error(`HTTP error! status: ${productList.status}`);
   }
+  if (!vendorList.ok) {
+    throw new Error(`HTTP error! status: ${vendorList.status}`);
+  }
+  if (!profileRes.ok) {
+    throw new Error(`HTTP error! status: ${profileRes.status}`);
+  }
 
   const productData = await productList.json();
   const vendorData = await vendorList.json();
+  const profileData = await profileRes.json();
 
   console.log(productData);
   let productHTML = "";
@@ -239,6 +247,9 @@ async function createRequest() {
     e.preventDefault();
 
     const formData = new FormData(requestForm);
+
+    // append store_id
+    formData.append("store_id", profileData.id);
 
     const product = productData.find(
       (item) => item.product_id === parseInt(formData.get("product_id"))

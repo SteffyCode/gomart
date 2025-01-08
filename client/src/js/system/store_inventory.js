@@ -6,6 +6,7 @@ import {
 } from "../utils/utils.js";
 
 logoutbutton();
+userlogged();
 
 async function getDatas(url = "", keyword) {
   const getcategoryTabsContent = document.getElementById("categoryTabsContent");
@@ -47,6 +48,7 @@ async function getDatas(url = "", keyword) {
   }
 
   const inventoryData = await inventoryResponse.json();
+  console.log("inventory: ", inventoryData.data);
   const productDatas = await productResponse.json();
   const vendorDatas = await vendorResponse.json();
   const profileData = await profileResponse.json();
@@ -56,7 +58,6 @@ async function getDatas(url = "", keyword) {
   if (inventoryResponse.ok) {
     let inventoryHTML = "";
     let inventoryTabHTML = "";
-    let seenSections = new Set();
 
     // Group inventory data by section
     const groupedInventory = inventoryData.data.reduce((acc, inventory) => {
@@ -546,8 +547,6 @@ async function deleteInfo(id) {
   }
 }
 
-userlogged();
-
 const addInvetoryForm = document.getElementById("add_inventory_form");
 
 addInvetoryForm.onsubmit = async (e) => {
@@ -557,6 +556,10 @@ addInvetoryForm.onsubmit = async (e) => {
     backendURL + "/api/inventory/store/all",
     { headers }
   );
+  const profileResponse = await fetch(backendURL + "/api/profile/show", {
+    headers,
+  });
+  const profileData = await profileResponse.json();
 
   if (!inventoryOwnedResponse.ok) {
     throw new Error("Can't fetch inventory");
@@ -566,10 +569,11 @@ addInvetoryForm.onsubmit = async (e) => {
 
   const formData = new FormData(addInvetoryForm);
 
+  formData.append("store_id", profileData.id);
+
   for (let [key, value] of formData.entries()) {
     console.log(key, value);
   }
-  console.log("asdasd", inventoryData, formData.get("product_id"));
 
   const createProductButton = document.querySelector(
     "#add_inventory_form button"
@@ -593,30 +597,31 @@ addInvetoryForm.onsubmit = async (e) => {
       createProductButton.innerHTML = "Create";
       return;
     }
-  }
 
-  const inventoryResponse = await fetch(backendURL + "/api/inventory", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    body: formData,
-  });
+    const inventoryResponse = await fetch(backendURL + "/api/inventory", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: formData,
+    });
 
-  if (!inventoryResponse.ok) {
-    addInvetoryForm.reset();
+    if (!inventoryResponse.ok) {
+      addInvetoryForm.reset();
+      createProductButton.disabled = false;
+      createProductButton.innerHTML = "Create";
+      alert("Can't Create Product");
+      throw new Error("Can't create product");
+      return;
+    } else {
+      alert("Successfully created inventory.");
+      addInvetoryForm.reset();
+    }
+
     createProductButton.disabled = false;
     createProductButton.innerHTML = "Create";
-    alert("Can't Create Product");
-    throw new Error("Can't create product");
-  } else {
-    alert("Successfully created inventory.");
-    addInvetoryForm.reset();
   }
-
-  createProductButton.disabled = false;
-  createProductButton.innerHTML = "Create";
 };
 
 async function getProducts() {
