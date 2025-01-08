@@ -1,6 +1,12 @@
-import { backendURL, headers, logoutbutton } from "../utils/utils.js";
+import {
+  backendURL,
+  headers,
+  userlogged,
+  logoutbutton,
+} from "../utils/utils.js";
 
 logoutbutton();
+userlogged();
 
 async function getDatas(url = "", keyword) {
   const getRequests = document.getElementById("getRequests");

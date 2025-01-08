@@ -58,11 +58,11 @@ async function getDatas(keyword) {
 
 // Generate HTML for a single store card
 function getStoreHTML(store) {
-  return `       
+  return `
     <!-- Store Card -->
     <div class="col">
       <div class="card text-center border-0">
-        <div class="card-body p-2">
+        <div class="card-body ">
           <!-- Store Image -->
           <img
             src="${

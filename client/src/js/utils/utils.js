@@ -25,10 +25,10 @@ async function redirectBasedOnType() {
 
   if (profileData?.business_type == "Retail") {
     localStorage.setItem("type", "Retail");
-    window.location.pathname = "/client/store_dashboard.html";
+    window.location.pathname = "/client/store_inventory.html";
   } else if (profileData?.business_type == "Vendor") {
     localStorage.setItem("type", "Vendor");
-    window.location.pathname = "/client/vendor.html";
+    window.location.pathname = "/client/vendor_products.html";
   } else if (profileData?.role == "Customer") {
     localStorage.setItem("type", "Customer");
     window.location.pathname = "/client/index.html";
