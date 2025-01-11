@@ -6,7 +6,7 @@ import {
 } from "../utils/utils.js";
 
 userlogged();
-logoutbutton();
+// logoutbutton();
 
 async function getCartItems() {
   const getCartByStore = document.getElementById("cartItems");

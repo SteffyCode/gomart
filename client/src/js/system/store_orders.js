@@ -54,6 +54,10 @@ async function getDatas(url = "", keyword) {
     let hasOrder = false;
     let orderHTML = "";
     let i = 0;
+    let index = 0;
+
+    console.log("order:", orderDatas);
+    console.log("cart:", cartDatas);
 
     orderDatas.data.forEach((order, index) => {
       const customer = customerDatas.find(
@@ -62,26 +66,30 @@ async function getDatas(url = "", keyword) {
 
       let orderedItems = "";
 
-      const currentCart = cartDatas[index]; // Get the cart for this index
-      if (currentCart && Array.isArray(currentCart.items)) {
-        currentCart.items.forEach((c) => {
-          const product = productDatas.find(
-            (p) => p.product_id === c.product_id
-          );
+      cartDatas.forEach((cart) => {
+        console.log("asdasd", cart);
+        if (cart && cart.items && cart.items.length > 0) {
+          cart.items.forEach((c) => {
+            if (c.cart_id === order.cart_id) {
+              console.log("asdadsag", c);
+              const product = productDatas.find(
+                (p) => p.product_id === c.product_id
+              );
 
-          if (product) {
-            orderedItems += `${product.product_name} (price (per):${c.price}) (qty:${c.quantity})<br>`;
-          } else {
-            console.warn(`Product not found for cart item:`, c);
-          }
-        });
-      } else {
-        console.warn(
-          `Cart data missing or invalid for index: ${index}`,
-          currentCart
-        );
-      }
-
+              if (product) {
+                orderedItems += `${product.product_name} (price (per): ${c.price}) (qty: ${c.quantity})<br>`;
+              } else {
+                console.warn(`Product not found for cart item:`, c);
+              }
+              index++;
+            } else {
+              return;
+            }
+          });
+        } else {
+          console.warn(`Cart or items missing for cart:`, cart);
+        }
+      });
       hasOrder = true;
       i++;
 
